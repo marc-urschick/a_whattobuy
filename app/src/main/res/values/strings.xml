@@ -1,0 +1,26 @@
+<resources>
+    <!-- Shoptypes: -->
+    <string name="shoptype_grocery">Groceries</string>
+    <string name="shoptype_technic">Technicals</string>
+    <string name="shoptype_cosmetic">Cosmetics</string>
+    <string name="shoptype_cloths">Clothing</string>
+    <string name="shoptype_liquor">Liquor and Drinks</string>
+    <string name="shoptype_furniture">Furniture</string>
+    <string name="shoptype_animals">Animals and Pets</string>
+    <string name="shoptype_plants">Plants and Garden stuff</string>
+    <string name="shoptype_literature">Literature and Books</string>
+    <string name="shoptype_office">Office supplies</string>
+    <string name="shoptype_toys">Toys and Children stuff</string>
+    <string name="shoptype_building">Building materials</string>
+    <string name="shoptype_chemicals">Chemicals</string>
+    <string name="shoptype_drugs">Drugs and Pharmaceuticals</string>
+    <string name="shoptype_gifts">Gifts and Presents</string>
+    <string name="shoptype_media">Media and Entertainment</string>
+    <string name="shoptype_services">Services</string>
+    <string name="shoptype_vehicles">Vehicles and Transportation</string>
+    <string name="shoptype_restaurant">Restaurants and Food</string>
+    <string name="shoptype_cafe">Cafes and Bars</string>
+    <string name="shoptype_other">Other</string>
+
+    <string name="app_name">What To Buy</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">What To Buy</string>
+
+    <!-- Shoptypes: -->
+    <string name="shoptype_animals">Haustiere und Tierbedarf</string>
+    <string name="shoptype_building">Baumaterialien</string>
+    <string name="shoptype_cafe">Kaffeehäuser und Bars</string>
+    <string name="shoptype_chemicals">Chemiewaren</string>
+    <string name="shoptype_cloths">Kleidung und Schuhe</string>
+    <string name="shoptype_cosmetic">Drogeriemarkt</string>
+    <string name="shoptype_drugs">Apotheken und Pharmazeutika</string>
+    <string name="shoptype_furniture">Einrichtung und Möbel</string>
+    <string name="shoptype_gifts">Geschenke und Souveniers</string>
+    <string name="shoptype_grocery">Lebensmittel</string>
+    <string name="shoptype_liquor">Getränkemarkt</string>
+    <string name="shoptype_literature">Buchhandlung</string>
+    <string name="shoptype_media">Medien und Unterhaltung</string>
+    <string name="shoptype_office">Büroartikel</string>
+    <string name="shoptype_other">Andere</string>
+    <string name="shoptype_plants">Gartenbedarf und Blumenhandlung</string>
+    <string name="shoptype_restaurant">Restaurants</string>
+    <string name="shoptype_services">Dienstleistungen</string>
+    <string name="shoptype_technic">Technikbedarf</string>
+    <string name="shoptype_toys">Spielzeughandlung und Kinderbedarf</string>
+    <string name="shoptype_vehicles">Autohaus und Fahrzeugbedarf</string>
+</resources>
