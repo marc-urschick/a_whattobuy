@@ -7,14 +7,24 @@ import java.util.Locale;
  */
 
 public class Item {
+    private long id;
     private String name;
     private String infos;
     private double menge;
 
     public Item() {
+        this.id = -1L;
         this.name = "";
         this.infos = "";
         this.menge = 0.0;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
