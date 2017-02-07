@@ -147,16 +147,16 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
             return;
 
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues vals = new ContentValues();
+        ContentValues values = new ContentValues();
 
-        vals.put(ITEM_TABLE_COL_NAME, i.getName());
-        vals.put(ITEM_TABLE_COL_INFO, i.getInfos());
-        vals.put(ITEM_TABLE_COL_AMOUNT, i.getMenge());
-        vals.put(ITEM_TABLE_COL_CHECKED, i.isChecked());
+        values.put(ITEM_TABLE_COL_NAME, i.getName());
+        values.put(ITEM_TABLE_COL_INFO, i.getInfos());
+        values.put(ITEM_TABLE_COL_AMOUNT, i.getMenge());
+        values.put(ITEM_TABLE_COL_CHECKED, i.isChecked());
 
         db.beginTransaction();
 
-        i.setId(db.insert(ITEM_TABLE_NAME, null, vals));
+        i.setId(db.insert(ITEM_TABLE_NAME, null, values));
 
         db.endTransaction();
     }
@@ -167,6 +167,11 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+
+        values.put(ITEM_TABLE_COL_NAME, i.getName());
+        values.put(ITEM_TABLE_COL_INFO, i.getInfos());
+        values.put(ITEM_TABLE_COL_AMOUNT, i.getMenge());
+        values.put(ITEM_TABLE_COL_CHECKED, i.isChecked());
 
         db.beginTransaction();
 
