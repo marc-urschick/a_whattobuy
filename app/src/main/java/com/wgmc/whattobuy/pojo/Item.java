@@ -10,13 +10,14 @@ public class Item {
     private long id;
     private String name;
     private String infos;
-    private double menge;
+    private String menge;
+    private boolean checked;
 
     public Item() {
         this.id = -1L;
         this.name = "";
         this.infos = "";
-        this.menge = 0.0;
+        this.menge = "";
     }
 
     public long getId() {
@@ -43,12 +44,20 @@ public class Item {
         this.infos = infos;
     }
 
-    public double getMenge() {
+    public String getMenge() {
         return menge;
     }
 
-    public void setMenge(double menge) {
+    public void setMenge(String menge) {
         this.menge = menge;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     @Override
