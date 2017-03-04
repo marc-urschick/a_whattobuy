@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Co si koupit</string>
+
+    <!-- Shoptypes: -->
+    <string name="shoptype_animals">Domácí zvířata a chovatelských potřeb</string>
+    <string name="shoptype_building">stavební materiály</string>
+    <string name="shoptype_cafe">Kaváren a barů</string>
+    <string name="shoptype_chemicals">Spotřební zboží</string>
+    <string name="shoptype_cloths">Oblečení a obuv</string>
+    <string name="shoptype_cosmetic">lékárna</string>
+    <string name="shoptype_drugs">Lékárny a farmaceutický průmysl</string>
+    <string name="shoptype_furniture">Zařízení a nábytek</string>
+    <string name="shoptype_gifts">Dárky a suvenýry</string>
+    <string name="shoptype_grocery">jídlo</string>
+    <string name="shoptype_liquor">nápoj na trhu</string>
+    <string name="shoptype_literature">knihkupectví</string>
+    <string name="shoptype_media">Média a zábavní</string>
+    <string name="shoptype_office">kancelářské potřeby</string>
+    <string name="shoptype_other">ostatní</string>
+    <string name="shoptype_plants">Zahradnictví a květinářství</string>
+    <string name="shoptype_restaurant">restaurace</string>
+    <string name="shoptype_services">služby</string>
+    <string name="shoptype_technic">technologických potřeb</string>
+    <string name="shoptype_toys">Hračkářství a dětských potřeb</string>
+    <string name="shoptype_vehicles">Požadavky na prodej a vozidel</string>
+
+</resources>
