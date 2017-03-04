@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Qué comprar</string>
+
+    <!-- Shoptypes: -->
+    <string name="shoptype_animals">Se admiten mascotas y suministros</string>
+    <string name="shoptype_building">Los materiales de construcción</string>
+    <string name="shoptype_cafe">Cafés y bares</string>
+    <string name="shoptype_chemicals">artículos de química</string>
+    <string name="shoptype_cloths">Ropa y Calzado</string>
+    <string name="shoptype_cosmetic">farmacia</string>
+    <string name="shoptype_drugs">Farmacias y farmacéuticos</string>
+    <string name="shoptype_furniture">Electrodomésticos y muebles</string>
+    <string name="shoptype_gifts">Regalos y recuerdos</string>
+    <string name="shoptype_grocery">comida</string>
+    <string name="shoptype_liquor">mercado de las bebidas</string>
+    <string name="shoptype_literature">librería</string>
+    <string name="shoptype_media">Medios de Comunicación y Entretenimiento</string>
+    <string name="shoptype_office">material de oficina</string>
+    <string name="shoptype_other">otro</string>
+    <string name="shoptype_plants">Jardinería y Floristería</string>
+    <string name="shoptype_restaurant">restaurantes</string>
+    <string name="shoptype_services">servicios</string>
+    <string name="shoptype_technic">las necesidades de tecnología</string>
+    <string name="shoptype_toys">Tienda de juguetes y necesidades de los niños</string>
+    <string name="shoptype_vehicles">Requisitos de concesionario de vehículos y</string>
+
+
+
+</resources>
