@@ -14,6 +14,19 @@ public class ShoppingList {
     private Shop whereToBuy;
     private List<Item> items;
     private Date dueTo;
+    private List<Store> store;
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public List<Store> getStore() {
+        return store;
+    }
+
+    public void setStore(List<Store> store) {
+        this.store = store;
+    }
 
     public ShoppingList(long id) {
         this.id = id;
