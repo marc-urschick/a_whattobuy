@@ -61,7 +61,18 @@ public class Item {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        return getId() == item.getId();
+
+    }
+
+    @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "%s (%.2f)", name, menge);
+        return String.format(Locale.getDefault(), "%s (%s)", name, menge);
     }
 }

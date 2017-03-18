@@ -14,7 +14,7 @@ public class Shop {
         this.id = id;
         this.name = "";
         this.address = "";
-        this.type = Shoptype.OTHER;
+//        this.type = Shoptype.OTHER;
     }
 
     public long getId() {

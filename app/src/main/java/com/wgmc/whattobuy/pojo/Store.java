@@ -21,6 +21,14 @@ public class Store {
         this.menge = "";
     }
 
+    public Store(long id, String name, String infos, String menge, boolean checked) {
+        this.id = id;
+        this.name = name;
+        this.infos = infos;
+        this.menge = menge;
+        this.checked = checked;
+    }
+
     public long getId() {
         return id;
     }
