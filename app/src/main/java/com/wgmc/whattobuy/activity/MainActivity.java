@@ -20,6 +20,7 @@ import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.fragment.BuylistListFragment;
 import com.wgmc.whattobuy.fragment.BuylistOverviewFragment;
 import com.wgmc.whattobuy.fragment.ContentFragment;
+import com.wgmc.whattobuy.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,9 +41,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        getFragmentManager().beginTransaction().add(R.id.activity_main_content_frame, new BuylistListFragment()).commit();
-
-
+        getFragmentManager().beginTransaction().add(R.id.activity_main_content_frame, activeFragment = new MainFragment()).commit();
     }
 
     @Override
@@ -53,7 +52,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (activeFragment != null) {
-            if (activeFragment.backAction()) {
+            if (!(activeFragment instanceof MainFragment)) {
+                if (activeFragment.backAction()) {
+                    getFragmentManager().beginTransaction().replace(R.id.activity_main_content_frame, activeFragment = new MainFragment()).commit();
+                }
+            } else {
                 super.onBackPressed();
             }
         } else {
