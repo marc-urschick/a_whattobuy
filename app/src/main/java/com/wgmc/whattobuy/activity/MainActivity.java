@@ -2,6 +2,7 @@ package com.wgmc.whattobuy.activity;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 //        getFragmentManager().beginTransaction().add(R.id.activity_main_content_frame, new BuylistListFragment()).commit();
+
+
     }
 
     @Override
@@ -63,6 +66,12 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.sidemenu, menu);
         return true;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        getFragmentManager().beginTransaction().replace(R.id.activity_main_content_frame, activeFragment).commit();
     }
 
     @Override
