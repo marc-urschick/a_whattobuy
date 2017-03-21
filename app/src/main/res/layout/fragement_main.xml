@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <TextClock
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textClock"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/activity_welcome_progress_size"
+            android:gravity="center"
+            android:text="Übersicht"
+            android:typeface="serif"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:text=":Listen"
+            android:id="@+id/frag_main_lists_cnt"
+            android:typeface="serif"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:text=":to do's"
+            android:id="@+id/frag_main_todo_cnt"
+            android:typeface="serif"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:text=":erledigt"
+            android:id="@+id/frag_main_done_cnt"
+            android:gravity="center"
+            android:typeface="serif"
+            />
+
+
+
+
+
+
+
+</LinearLayout>
