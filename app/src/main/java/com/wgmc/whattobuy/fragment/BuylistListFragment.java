@@ -24,7 +24,11 @@ import com.wgmc.whattobuy.service.ShoplistService;
 
 public class BuylistListFragment extends Fragment {
     public static final String ARG_EXTENDED_ITEM = "arg_ext_list";
+    private BuylistOverviewFragment parent;
 
+    public BuylistListFragment(BuylistOverviewFragment parent) {
+        this.parent = parent;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class BuylistListFragment extends Fragment {
         boolean ext = args.getBoolean(ARG_EXTENDED_ITEM, true);
         ListAdapter adapter;
 
+//        System.out.println(ext);
+
         if (ext) {
             adapter = new ExtendedShoppingListAdapter(getActivity());
         } else {
@@ -51,7 +57,9 @@ public class BuylistListFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ShoppingList list = (ShoppingList) adapterView.getAdapter().getItem(i);
                 if (list != null) {
-                    ((BuylistOverviewActivity)getActivity()).displayDetailList(list);
+//                    ((BuylistOverviewActivity)getActivity()).displayDetailList(list);
+//                    BuylistOverviewFragment parent = (BuylistOverviewFragment) getParentFragment();
+                    parent.displayDetails(list);
                 } else {
                     Toast.makeText(getActivity(), "internal error", Toast.LENGTH_SHORT).show();
                 }

@@ -1,5 +1,6 @@
 package com.wgmc.whattobuy.activity;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,9 +17,13 @@ import android.view.MenuItem;
 
 import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.fragment.BuylistListFragment;
+import com.wgmc.whattobuy.fragment.BuylistOverviewFragment;
+import com.wgmc.whattobuy.fragment.ContentFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ContentFragment activeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }
+
+        if (activeFragment != null) {
+            if (activeFragment.backAction()) {
+                super.onBackPressed();
+            }
         } else {
             super.onBackPressed();
         }
@@ -50,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.sidemenu, menu);
         return true;
     }
 
@@ -74,9 +85,21 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_list_buylist:
-                startActivity(new Intent(getApplicationContext(), BuylistOverviewActivity.class));
+//                startActivity(new Intent(getApplicationContext(), BuylistOverviewActivity.class));
+                System.out.println("i kumm no ins on nav item selected hin...");
+                FragmentManager man = getFragmentManager();
+                BuylistOverviewFragment frag = new BuylistOverviewFragment();
+                Bundle args = new Bundle();
+                args.putBoolean(BuylistListFragment.ARG_EXTENDED_ITEM, false);
+                frag.setArguments(args);
+                man.beginTransaction().replace(R.id.activity_main_content_frame, frag).commit();
+                activeFragment = frag;
                 break;
             case R.id.menu_list_shop:
+                break;
+            case R.id.menu_home:
+                // display home screen as well...
+                activeFragment = null;
                 break;
         }
 

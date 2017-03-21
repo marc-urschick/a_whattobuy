@@ -9,8 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:text="List Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:text="List Name" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,8 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:text="Shopname"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="Shopname" />
 
         <Space
             android:layout_width="wrap_content"
@@ -38,8 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginRight="16dp"
-            android:text="24 Items"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="24 Items" />
     </LinearLayout>
 
 
