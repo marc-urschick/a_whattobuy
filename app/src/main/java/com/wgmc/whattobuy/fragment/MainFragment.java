@@ -19,7 +19,6 @@ import java.util.Locale;
  */
 
 public class MainFragment extends ContentFragment {
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -50,10 +49,5 @@ public class MainFragment extends ContentFragment {
         ((TextView)v.findViewById(R.id.frag_main_done_cnt)).setText(numOfDones);
 
         return v;
-    }
-
-    @Override
-    public boolean backAction() {
-        return true;
     }
 }

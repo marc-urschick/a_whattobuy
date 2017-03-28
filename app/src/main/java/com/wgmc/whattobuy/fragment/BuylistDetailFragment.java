@@ -1,16 +1,22 @@
 package com.wgmc.whattobuy.fragment;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.adapter.ExtendedShoppingItemListAdapter;
+import com.wgmc.whattobuy.fragment.dialog.ItemDialogFragment;
+import com.wgmc.whattobuy.fragment.dialog.ShoppingListDialogFragment;
 import com.wgmc.whattobuy.pojo.ShoppingList;
 import com.wgmc.whattobuy.service.ShoplistService;
 
@@ -26,6 +32,7 @@ public class BuylistDetailFragment extends Fragment implements Observer {
 
     private TextView title, date, shop;
     private ListView items;
+    private FloatingActionButton addButton;
 
     private ShoppingList list;
 
@@ -45,12 +52,29 @@ public class BuylistDetailFragment extends Fragment implements Observer {
 
         list = ShoplistService.getInstance().getShoppingListById((int) getArguments().getLong(ARG_LIST_ID, -1));
 
+        addButton = (FloatingActionButton) root.findViewById(R.id.frag_bld_add);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dia = new ItemDialogFragment(list, null);
+                dia.show(getFragmentManager(), "Neues Element erstellen");
+            }
+        });
+
+        root.findViewById(R.id.frag_bld_edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dia = new ShoppingListDialogFragment(list);
+                dia.show(getFragmentManager(), "Edit Shopping List Dialog");
+            }
+        });
+
         if (list != null) {
             title.setText(list.getName());
             date.setText(ShoplistService.displayDateFormat.format(list.getDueTo()));
             shop.setText(list.getWhereToBuy().getName());
-            items.setAdapter(new ExtendedShoppingItemListAdapter(getActivity(), list.getItems()));
-            System.out.println("showing list");
+            items.setAdapter(createAdapter());
         }
 
         return root;
@@ -59,11 +83,9 @@ public class BuylistDetailFragment extends Fragment implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         if (o instanceof ShoppingList) {
-            System.out.println("displaying " + o);
             list = (ShoppingList) o;
-//            this.
+
             if (title != null) {
-                System.out.println("showing list");
                 title.setText(list.getName());
             }
 
@@ -76,8 +98,17 @@ public class BuylistDetailFragment extends Fragment implements Observer {
             }
 
             if (items != null) {
-                items.setAdapter(new ExtendedShoppingItemListAdapter(getActivity(), list.getItems()));
+                items.setAdapter(createAdapter());
             }
         }
+    }
+
+    private ListAdapter createAdapter() {
+        return new ExtendedShoppingItemListAdapter(
+                getActivity(),
+                getFragmentManager(),
+                list,
+                list.getItems()
+        );
     }
 }

@@ -48,4 +48,9 @@ public class Shop {
     public void setType(Shoptype type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + id + ")";
+    }
 }

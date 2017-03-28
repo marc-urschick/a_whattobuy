@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wgmc.whattobuy.R;
-import com.wgmc.whattobuy.activity.BuylistOverviewActivity;
 import com.wgmc.whattobuy.pojo.ShoppingList;
 
 /**
@@ -30,7 +29,8 @@ public class BuylistOverviewFragment extends ContentFragment {
         Bundle listArgs = new Bundle();
 
         listArgs.putBoolean(BuylistListFragment.ARG_EXTENDED_ITEM, !dual);
-        Fragment list = new BuylistListFragment(this);
+        BuylistListFragment list = new BuylistListFragment();
+        list.setParent(this);
 
         list.setArguments(listArgs);
 
@@ -51,23 +51,21 @@ public class BuylistOverviewFragment extends ContentFragment {
         System.out.println("display list");
         Bundle arg = new Bundle();
         arg.putLong(BuylistDetailFragment.ARG_LIST_ID, list.getId());
-        System.out.println("bundle created and filled");
         Fragment frag = new BuylistDetailFragment();
         frag.setArguments(arg);
-        System.out.println("fragment created and args assigned");
         detailsOpen = true;
         getFragmentManager().beginTransaction().replace(dual ? R.id.frag_bl_ov_detail : R.id.frag_bl_ov_content, frag).commit();
-        System.out.println("fragment switched");
     }
 
     @Override
-    public boolean backAction() {
+    public int backAction() {
         if (detailsOpen) {
             if (!dual) {
                 Bundle listArgs = new Bundle();
 
                 listArgs.putBoolean(BuylistListFragment.ARG_EXTENDED_ITEM, !dual);
-                Fragment list = new BuylistListFragment(this);
+                BuylistListFragment list = new BuylistListFragment();
+                list.setParent(this);
 
                 list.setArguments(listArgs);
 
@@ -75,8 +73,8 @@ public class BuylistOverviewFragment extends ContentFragment {
             }
 
             detailsOpen = false;
-            return false;
+            return NO_BACK_ACTION;
         }
-        return true;
+        return MOVE_TO_PARENT_BACK_ACTION;
     }
 }

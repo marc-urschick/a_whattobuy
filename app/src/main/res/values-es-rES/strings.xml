@@ -25,7 +25,13 @@
     <string name="shoptype_technic">las necesidades de tecnología</string>
     <string name="shoptype_toys">Tienda de juguetes y necesidades de los niños</string>
     <string name="shoptype_vehicles">Requisitos de concesionario de vehículos y</string>
-
+    <string name="menu_home">Home</string>
+    <string name="menu_lists">Lists</string>
+    <string name="menu_buylists">Buylists</string>
+    <string name="menu_shops">Shops</string>
+    <string name="menu_assets">Assets</string>
+    <string name="menu_shop">Shop</string>
+    <string name="menu_settings">Einstellungen</string>
 
 
 </resources>

@@ -12,11 +12,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.wgmc.whattobuy.R;
-import com.wgmc.whattobuy.activity.BuylistOverviewActivity;
 import com.wgmc.whattobuy.adapter.ExtendedShoppingListAdapter;
 import com.wgmc.whattobuy.adapter.StandardShoppingListAdapter;
+import com.wgmc.whattobuy.fragment.dialog.ShoppingListDialogFragment;
 import com.wgmc.whattobuy.pojo.ShoppingList;
-import com.wgmc.whattobuy.service.ShoplistService;
 
 /**
  * Created by notxie on 09.03.17.
@@ -25,10 +24,6 @@ import com.wgmc.whattobuy.service.ShoplistService;
 public class BuylistListFragment extends Fragment {
     public static final String ARG_EXTENDED_ITEM = "arg_ext_list";
     private BuylistOverviewFragment parent;
-
-    public BuylistListFragment(BuylistOverviewFragment parent) {
-        this.parent = parent;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +36,7 @@ public class BuylistListFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_buylist_list, container, false);
         Bundle args = getArguments();
         boolean ext = args.getBoolean(ARG_EXTENDED_ITEM, true);
-        ListAdapter adapter;
+        final ListAdapter adapter;
 
 //        System.out.println(ext);
 
@@ -55,7 +50,7 @@ public class BuylistListFragment extends Fragment {
         ((ListView) v.findViewById(R.id.frag_bll_list)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ShoppingList list = (ShoppingList) adapterView.getAdapter().getItem(i);
+                ShoppingList list = (ShoppingList) adapter.getItem(i);
                 if (list != null) {
 //                    ((BuylistOverviewActivity)getActivity()).displayDetailList(list);
 //                    BuylistOverviewFragment parent = (BuylistOverviewFragment) getParentFragment();
@@ -66,6 +61,18 @@ public class BuylistListFragment extends Fragment {
             }
         });
 
+        v.findViewById(R.id.frag_bll_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingListDialogFragment dialog = new ShoppingListDialogFragment(null);
+                dialog.show(getFragmentManager(), "Create Shopping List Dialog");
+            }
+        });
+
         return v;
+    }
+
+    public void setParent(BuylistOverviewFragment parent) {
+        this.parent = parent;
     }
 }

@@ -12,12 +12,14 @@ public class Item {
     private String infos;
     private String menge;
     private boolean checked;
+    private long listId;
 
     public Item() {
         this.id = -1L;
         this.name = "";
         this.infos = "";
         this.menge = "";
+        this.listId = -1L;
     }
 
     public long getId() {
@@ -58,6 +60,14 @@ public class Item {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public void setListId(long listId) {
+        this.listId = listId;
+    }
+
+    public long getListId() {
+        return listId;
     }
 
     @Override

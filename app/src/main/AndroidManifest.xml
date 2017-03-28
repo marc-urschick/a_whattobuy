@@ -17,9 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BuylistOverviewActivity" />
         <activity android:name=".activity.MainActivity" android:configChanges="orientation" />
-        <activity android:name=".activity.BuylistDetailActivity" />
     </application>
 
 </manifest>

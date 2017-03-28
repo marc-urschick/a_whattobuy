@@ -13,34 +13,37 @@ import java.util.List;
  */
 
 public enum Shoptype {
-    GROCERY         (Resources.getSystem().getString(R.string.shoptype_grocery), 1),
-    TECHNIC         (Resources.getSystem().getString(R.string.shoptype_technic), 2),
-    CLOTHS          (Resources.getSystem().getString(R.string.shoptype_cloths), 3),
-    LIQUOR          (Resources.getSystem().getString(R.string.shoptype_liquor), 4),
-    FURNITURE       (Resources.getSystem().getString(R.string.shoptype_furniture), 5),
-    ANIMALS         (Resources.getSystem().getString(R.string.shoptype_animals), 6),
-    PLANTS          (Resources.getSystem().getString(R.string.shoptype_plants), 7),
-    LITERATURE      (Resources.getSystem().getString(R.string.shoptype_literature), 8),
-    OFFICE_SUPPLIES (Resources.getSystem().getString(R.string.shoptype_office), 9),
-    TOYS            (Resources.getSystem().getString(R.string.shoptype_toys), 10),
-    BUILDING_SUPPLIES(Resources.getSystem().getString(R.string.shoptype_building), 11),
-    CHEMICALS       (Resources.getSystem().getString(R.string.shoptype_chemicals), 12),
-    DRUGS           (Resources.getSystem().getString(R.string.shoptype_drugs), 13),
-    GIFTS           (Resources.getSystem().getString(R.string.shoptype_gifts), 14),
-    MEDIA           (Resources.getSystem().getString(R.string.shoptype_media), 15),
-    COSMETICS       (Resources.getSystem().getString(R.string.shoptype_cosmetic), 16),
-    SERVICES        (Resources.getSystem().getString(R.string.shoptype_services), 17),
-    VEHICLES        (Resources.getSystem().getString(R.string.shoptype_vehicles), 18),
-    RESTAURANT      (Resources.getSystem().getString(R.string.shoptype_restaurant), 19),
-    CAFE            (Resources.getSystem().getString(R.string.shoptype_cafe), 20),
-    OTHER           (Resources.getSystem().getString(R.string.shoptype_other), 21);
+    GROCERY(1),
+    TECHNIC(2),
+    CLOTHS(3),
+    LIQUOR(4),
+    FURNITURE(5),
+    ANIMALS(6),
+    PLANTS(7),
+    LITERATURE(8),
+    OFFICE_SUPPLIES(9),
+    TOYS(10),
+    BUILDING_SUPPLIES(11),
+    CHEMICALS(12),
+    DRUGS(13),
+    GIFTS(14),
+    MEDIA(15),
+    COSMETICS(16),
+    SERVICES(17),
+    VEHICLES(18),
+    RESTAURANT(19),
+    CAFE(20),
+    OTHER(21);
 
     private String shownAs;
     private long id;
 
-    Shoptype(String shownAs, long id) {
-        this.shownAs = shownAs;
+    Shoptype(long id) {
         this.id = id;
+    }
+
+    public void setShownAs(String s) {
+        this.shownAs = s + "";
     }
 
     public String getShownAs() {
@@ -60,10 +63,15 @@ public enum Shoptype {
     }
 
     public static Shoptype decodeFromId(long id) {
-        for (Shoptype t:values()) {
+        for (Shoptype t : values()) {
             if (t.id == id)
                 return t;
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return shownAs;
     }
 }

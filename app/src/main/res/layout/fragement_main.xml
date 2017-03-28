@@ -1,64 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Übersicht"
+        android:textSize="@dimen/frag_main_title"
+        android:typeface="serif" />
 
+    <TextView
+        android:id="@+id/frag_main_lists_cnt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=":Listen"
+        android:textSize="@dimen/frag_main_information"
+        android:typeface="serif" />
 
-        <TextClock
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textClock"
-            android:gravity="center"
-            />
+    <TextView
+        android:id="@+id/frag_main_todo_cnt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=":to do's"
+        android:textSize="@dimen/frag_main_information"
+        android:typeface="serif" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/frag_main_title"
-            android:gravity="center"
-            android:text="Übersicht"
-            android:typeface="serif"
-            />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/frag_main_information"
-            android:text=":Listen"
-            android:id="@+id/frag_main_lists_cnt"
-            android:typeface="serif"
-            />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/frag_main_information"
-            android:text=":to do's"
-            android:id="@+id/frag_main_todo_cnt"
-            android:typeface="serif"
-            />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/frag_main_information"
-            android:text=":erledigt"
-            android:id="@+id/frag_main_done_cnt"
-            android:gravity="center"
-            android:typeface="serif"
-            />
-
-
-
-
-
-
+    <TextView
+        android:id="@+id/frag_main_done_cnt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=":erledigt"
+        android:textSize="@dimen/frag_main_information"
+        android:typeface="serif" />
 
 </LinearLayout>

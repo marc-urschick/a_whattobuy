@@ -42,7 +42,8 @@
         <TextView
             android:text="Menge"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dp"/>
 
         <TextView
             android:id="@+id/shoplist_item_extended_list_item_menge"
@@ -61,13 +62,13 @@
             android:id="@+id/shoplist_item_extended_list_item_edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_menu_edit"/>
+            android:text="Edit"/>
 
         <Button
             android:id="@+id/shoplist_item_extended_list_item_remove_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_menu_delete"/>
+            android:text="Remove"/>
     </LinearLayout>
 
 </LinearLayout>

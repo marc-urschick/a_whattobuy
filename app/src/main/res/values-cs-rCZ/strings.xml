@@ -25,5 +25,12 @@
     <string name="shoptype_technic">technologických potřeb</string>
     <string name="shoptype_toys">Hračkářství a dětských potřeb</string>
     <string name="shoptype_vehicles">Požadavky na prodej a vozidel</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_lists">Lists</string>
+    <string name="menu_buylists">Buylists</string>
+    <string name="menu_shops">Shops</string>
+    <string name="menu_assets">Assets</string>
+    <string name="menu_shop">Shop</string>
+    <string name="menu_settings">Einstellungen</string>
 
 </resources>

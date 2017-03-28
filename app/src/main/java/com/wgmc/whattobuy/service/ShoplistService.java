@@ -2,12 +2,14 @@ package com.wgmc.whattobuy.service;
 
 import android.util.SparseArray;
 
+import com.wgmc.whattobuy.pojo.Item;
 import com.wgmc.whattobuy.pojo.ShoppingList;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,7 +17,7 @@ import java.util.Observer;
  * Created by notxie on 09.03.17.
  */
 
-public class ShoplistService extends Observable {
+public class ShoplistService extends DefaultService {
     public static void generateInstance() {
         instance = new ShoplistService();
     }
@@ -33,35 +35,15 @@ public class ShoplistService extends Observable {
     private List<ShoppingList> shoppingLists;
     private SparseArray<ShoppingList> assignedShoppingLists;
 
-    public static final DateFormat displayDateFormat = new SimpleDateFormat("dd. MM. yyyy");
-
-    private List<Observer> observers = new ArrayList<>();
-
-    @Override
-    public synchronized void addObserver(Observer o) {
-        observers.add(o);
-    }
-
-    @Override
-    public synchronized void deleteObserver(Observer o) {
-        observers.remove(o);
-    }
-
-    @Override
-    public void notifyObservers() {
-        notifyObservers(null);
-    }
-
-    @Override
-    public void notifyObservers(Object arg) {
-        for (Observer o : observers) {
-            o.update(this, arg);
-        }
-    }
+    public static final DateFormat displayDateFormat = new SimpleDateFormat("dd. MM. yyyy", Locale.getDefault());
 
     private ShoplistService() {
         shoppingLists = new ArrayList<>();
         assignedShoppingLists = new SparseArray<>();
+
+        for (ShoppingList l : MainService.getInstance().getDb().getAllShoppingLists()) {
+            rawAdd(l);
+        }
     }
 
     public List<ShoppingList> getShoppingLists() {
@@ -72,10 +54,45 @@ public class ShoplistService extends Observable {
         return assignedShoppingLists.get(id);
     }
 
-    public void addShoppingList(ShoppingList list) {
+    private void rawAdd(ShoppingList l) {
+        shoppingLists.add(l);
+        assignedShoppingLists.put((int) l.getId(), l);
+    }
+
+    private void rawRemove(ShoppingList list) {
+        shoppingLists.remove(list);
+        assignedShoppingLists.remove((int) list.getId());
+    }
+
+    public void addShoppingList(ShoppingList l) {
+        if (l == null)
+            return;
+
+        if (l.getId() < 0) {
+            rawAdd(l);
+            MainService.getInstance().getDb().createList(l);
+        } else {
+            MainService.getInstance().getDb().updateList(l);
+        }
+
+        for (Item i : l.getItems()) {
+            ItemService.getInstance().addItem(i);
+        }
+        notifyObservers(l);
+    }
+
+    public void removeShoppingList(ShoppingList list) {
+        if (list == null)
+            return;
+
         if (list.getId() > 0) {
-            shoppingLists.add(list);
-            assignedShoppingLists.put((int) list.getId(), list);
+            rawRemove(list);
+            MainService.getInstance().getDb().deleteShoppingList(list);
+            notifyObservers();
+        }
+
+        for (Item i : list.getItems()) {
+            ItemService.getInstance().removeItem(i);
         }
     }
 }
