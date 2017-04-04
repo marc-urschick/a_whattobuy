@@ -1,7 +1,13 @@
 package com.wgmc.whattobuy.fragment;
 
 import android.app.Fragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
+import com.wgmc.whattobuy.service.DefaultService;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,28 +16,38 @@ import java.util.Observer;
  */
 
 public abstract class ContentFragment extends Fragment implements Observer {
-    public static final int REDIRECT_BACK_ACTION = 1;
     public static final int NO_BACK_ACTION = 2;
     public static final int MOVE_TO_PARENT_BACK_ACTION = 3;
 
-    private ContentFragment parent;
+    private List<DefaultService> observingServices = new ArrayList<>();
+
+    protected void addObservingService(DefaultService s) {
+        observingServices.add(s);
+    }
 
     /**
      *
      * @return boolean true if the back action shall be redirected to the calling class
      */
     public int backAction() {
-        if (getParent() == null)
-            return REDIRECT_BACK_ACTION;
         return MOVE_TO_PARENT_BACK_ACTION;
     }
 
-    public ContentFragment getParent() {
-        return parent;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        setRetainInstance(true);
+        for (DefaultService s : observingServices) {
+            s.addObserver(this);
+        }
     }
 
-    public void setParent(ContentFragment parent) {
-        this.parent = parent;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        for (DefaultService s : observingServices) {
+            s.deleteObserver(this);
+        }
     }
 
     @Override

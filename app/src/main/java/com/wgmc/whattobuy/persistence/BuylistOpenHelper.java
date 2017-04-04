@@ -101,6 +101,11 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, newVersion, oldVersion);
+    }
+
     // <editor-fold desc="Item crud methods">
     private Item createItemFromCursor(Cursor c) {
         Item i = new Item();
@@ -109,7 +114,7 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
         i.setName(c.getString(c.getColumnIndex(ITEM_TABLE_COL_NAME)));
         i.setInfos(c.getString(c.getColumnIndex(ITEM_TABLE_COL_INFO)));
         i.setMenge(c.getString(c.getColumnIndex(ITEM_TABLE_COL_AMOUNT)));
-        i.setChecked(c.getInt(c.getColumnIndex(ITEM_TABLE_COL_CHECKED)) == 0);
+        i.setChecked(c.getInt(c.getColumnIndex(ITEM_TABLE_COL_CHECKED)) != 0);
         i.setListId(c.getInt(c.getColumnIndex(ITEM_TABLE_COL_LIST_ID)));
 
         return i;
@@ -163,6 +168,7 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
         ContentValues values = createValuesForItem(i);
 
         i.setId(db.insert(ITEM_TABLE_NAME, null, values));
+        System.out.println(i.getId());
     }
 
     public void updateItem(Item i) {
@@ -221,16 +227,12 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
     }
 
     public List<Shop> getAllShops() {
-        System.out.println("get all");
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cr = db.rawQuery("select * from " + SHOP_TABLE_NAME, null);
         List<Shop> items = new ArrayList<>();
 
-        System.out.println("select in cursor");
         if (cr != null) {
-            System.out.println("cursor not null");
             while (cr.moveToNext()) {
-                System.out.println("cr row");
                 items.add(createShopFromCursor(cr));
             }
         }
@@ -277,7 +279,7 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
         ShoppingList s = new ShoppingList(-1L);
 
         s.setId(c.getLong(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_ID)));
-        s.setName(c.getString(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_ID)));
+        s.setName(c.getString(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_NAME)));
         s.setDueTo(new Date(c.getLong(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_DUETO))));
         s.setWhereToBuy(getShopById(c.getLong(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_SHOPID))));
 

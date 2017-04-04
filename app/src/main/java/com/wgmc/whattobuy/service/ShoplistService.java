@@ -69,8 +69,8 @@ public class ShoplistService extends DefaultService {
             return;
 
         if (l.getId() < 0) {
-            rawAdd(l);
             MainService.getInstance().getDb().createList(l);
+            rawAdd(l);
         } else {
             MainService.getInstance().getDb().updateList(l);
         }
@@ -86,8 +86,8 @@ public class ShoplistService extends DefaultService {
             return;
 
         if (list.getId() > 0) {
-            rawRemove(list);
             MainService.getInstance().getDb().deleteShoppingList(list);
+            rawRemove(list);
             notifyObservers();
         }
 

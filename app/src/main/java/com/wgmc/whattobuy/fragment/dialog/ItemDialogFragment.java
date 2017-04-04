@@ -3,6 +3,7 @@ package com.wgmc.whattobuy.fragment.dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ public class ItemDialogFragment extends DialogFragment {
         if (this.toEdit == null) {
             this.toEdit = new Item();
             this.toEdit.setId(-1);
+            this.toEdit.setListId(list.getId());
+            this.toEdit.setChecked(false);
         }
     }
 
@@ -48,7 +51,13 @@ public class ItemDialogFragment extends DialogFragment {
                     toEdit.setInfos(((EditText) v.findViewById(R.id.dialog_item_infos)).getText().toString());
                     toEdit.setMenge(((EditText) v.findViewById(R.id.dialog_item_menge)).getText().toString());
 
+
+                    boolean newItem = toEdit.getId() < 0;
                     ItemService.getInstance().addItem(toEdit);
+
+                    if (newItem) {
+                        list.addItem(toEdit);
+                    }
                     dismiss();
                 }
             });

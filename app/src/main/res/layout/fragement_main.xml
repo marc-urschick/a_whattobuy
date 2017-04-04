@@ -21,12 +21,21 @@
         android:typeface="serif" />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:layout_height="@dimen/underline_medium"
+        android:background="@color/colorAccent"/>
+
+    <TextView
         android:id="@+id/frag_main_lists_cnt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text=":Listen"
-        android:textSize="@dimen/frag_main_information"
+        android:textSize="@dimen/frag_main_information_big"
         android:typeface="serif" />
 
     <TextView
@@ -35,7 +44,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text=":to do's"
-        android:textSize="@dimen/frag_main_information"
+        android:textSize="@dimen/frag_main_information_medium"
         android:typeface="serif" />
 
     <TextView
@@ -44,7 +53,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text=":erledigt"
-        android:textSize="@dimen/frag_main_information"
+        android:textSize="@dimen/frag_main_information_medium"
         android:typeface="serif" />
 
 </LinearLayout>

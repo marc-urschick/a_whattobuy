@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.wgmc.whattobuy.adapter.ExtendedShoppingItemListAdapter;
 import com.wgmc.whattobuy.fragment.dialog.ItemDialogFragment;
 import com.wgmc.whattobuy.fragment.dialog.ShoppingListDialogFragment;
 import com.wgmc.whattobuy.pojo.ShoppingList;
+import com.wgmc.whattobuy.service.FeatureService;
+import com.wgmc.whattobuy.service.ItemService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
 import java.util.Observable;
@@ -27,7 +30,7 @@ import java.util.Observer;
  * Created by notxie on 09.03.17.
  */
 
-public class BuylistDetailFragment extends Fragment implements Observer {
+public class BuylistDetailFragment extends ContentFragment implements Observer {
     public static final String ARG_LIST_ID = "arg_list_id";
 
     private TextView title, date, shop;
@@ -37,7 +40,8 @@ public class BuylistDetailFragment extends Fragment implements Observer {
     private ShoppingList list;
 
     public BuylistDetailFragment() {
-        ShoplistService.getInstance().addObserver(this);
+        addObservingService(ShoplistService.getInstance());
+        addObservingService(ItemService.getInstance());
     }
 
     @Nullable
@@ -51,6 +55,7 @@ public class BuylistDetailFragment extends Fragment implements Observer {
         items = (ListView) root.findViewById(R.id.frag_bld_items);
 
         list = ShoplistService.getInstance().getShoppingListById((int) getArguments().getLong(ARG_LIST_ID, -1));
+        Log.d("Detail Fragment", list == null ? "list is null" : list.toString());
 
         addButton = (FloatingActionButton) root.findViewById(R.id.frag_bld_add);
 
@@ -100,6 +105,8 @@ public class BuylistDetailFragment extends Fragment implements Observer {
             if (items != null) {
                 items.setAdapter(createAdapter());
             }
+        } else if (o instanceof FeatureService) {
+            // todo code for check top most unchecked item
         }
     }
 

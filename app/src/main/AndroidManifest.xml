@@ -2,22 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wgmc.whattobuy">
 
+    <uses-feature android:name="android.hardware.sensor.accelerator" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".activity.LoadingActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" android:configChanges="orientation" />
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleInstance"
+            android:configChanges="orientation">
+
+            </activity>
     </application>
 
 </manifest>

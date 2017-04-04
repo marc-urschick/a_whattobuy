@@ -20,6 +20,7 @@ public class Item {
         this.infos = "";
         this.menge = "";
         this.listId = -1L;
+        checked = false;
     }
 
     public long getId() {

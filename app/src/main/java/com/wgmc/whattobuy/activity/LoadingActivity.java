@@ -1,25 +1,42 @@
 package com.wgmc.whattobuy.activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.wgmc.whattobuy.R;
+import com.wgmc.whattobuy.feature.ShakeSensorFeature;
 import com.wgmc.whattobuy.persistence.BuylistOpenHelper;
-import com.wgmc.whattobuy.pojo.Item;
-import com.wgmc.whattobuy.pojo.Shop;
-import com.wgmc.whattobuy.pojo.ShoppingList;
-import com.wgmc.whattobuy.pojo.Shoptype;
+import com.wgmc.whattobuy.service.FeatureService;
 import com.wgmc.whattobuy.service.ItemService;
 import com.wgmc.whattobuy.service.MainService;
 import com.wgmc.whattobuy.service.ShopService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
-import static com.wgmc.whattobuy.pojo.Shoptype.*;
+import static com.wgmc.whattobuy.pojo.Shoptype.ANIMALS;
+import static com.wgmc.whattobuy.pojo.Shoptype.BUILDING_SUPPLIES;
+import static com.wgmc.whattobuy.pojo.Shoptype.CAFE;
+import static com.wgmc.whattobuy.pojo.Shoptype.CHEMICALS;
+import static com.wgmc.whattobuy.pojo.Shoptype.CLOTHS;
+import static com.wgmc.whattobuy.pojo.Shoptype.COSMETICS;
+import static com.wgmc.whattobuy.pojo.Shoptype.DRUGS;
+import static com.wgmc.whattobuy.pojo.Shoptype.FURNITURE;
+import static com.wgmc.whattobuy.pojo.Shoptype.GIFTS;
+import static com.wgmc.whattobuy.pojo.Shoptype.GROCERY;
+import static com.wgmc.whattobuy.pojo.Shoptype.LIQUOR;
+import static com.wgmc.whattobuy.pojo.Shoptype.LITERATURE;
+import static com.wgmc.whattobuy.pojo.Shoptype.MEDIA;
+import static com.wgmc.whattobuy.pojo.Shoptype.OFFICE_SUPPLIES;
+import static com.wgmc.whattobuy.pojo.Shoptype.OTHER;
+import static com.wgmc.whattobuy.pojo.Shoptype.PLANTS;
+import static com.wgmc.whattobuy.pojo.Shoptype.RESTAURANT;
+import static com.wgmc.whattobuy.pojo.Shoptype.SERVICES;
+import static com.wgmc.whattobuy.pojo.Shoptype.TECHNIC;
+import static com.wgmc.whattobuy.pojo.Shoptype.TOYS;
+import static com.wgmc.whattobuy.pojo.Shoptype.VEHICLES;
 
 public class LoadingActivity extends AppCompatActivity {
-    private static final String PREF_NAME = "whattobuy_preferences";
+    public static final String PREF_NAME = "whattobuy_preferences";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +60,12 @@ public class LoadingActivity extends AppCompatActivity {
         ShoplistService.generateInstance();
         ItemService.generateInstance();
 
+        FeatureService.createInstance();
+
+        // init sensors und features
+        ShakeSensorFeature ssf = new ShakeSensorFeature(this);
+        FeatureService.getInstance().addSensorFeature(ssf);
+
         // redirect to next page
         startActivity(new Intent(this, MainActivity.class));
     }
@@ -56,7 +79,7 @@ public class LoadingActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MainService.destroyInstance();
+//        MainService.destroyInstance();
     }
 
     private void initShoptypeStrings() {

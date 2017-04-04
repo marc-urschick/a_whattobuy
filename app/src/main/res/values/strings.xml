@@ -39,4 +39,7 @@
     <string name="menu_assets">Assets</string>
     <string name="menu_shop">Shop</string>
     <string name="menu_settings">Settings</string>
+    <string name="shop_list_title">Shops</string>
+    <string name="settings_shakeToCheckItems">Use Shake to Check Items</string>
+    <string name="exit">Exit</string>
 </resources>

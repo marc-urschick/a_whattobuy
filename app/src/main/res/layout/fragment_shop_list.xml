@@ -10,6 +10,20 @@ android:fitsSystemWindows="true">
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_shops"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/underline_medium"
+        android:background="@color/colorAccent"/>
+
     <ListView
         android:id="@+id/frag_shl_list"
         android:layout_width="match_parent"

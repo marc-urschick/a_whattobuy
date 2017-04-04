@@ -16,43 +16,59 @@ import com.wgmc.whattobuy.fragment.BuylistListFragment;
 import com.wgmc.whattobuy.fragment.BuylistOverviewFragment;
 import com.wgmc.whattobuy.fragment.ContentFragment;
 import com.wgmc.whattobuy.fragment.MainFragment;
+import com.wgmc.whattobuy.fragment.SettingsFragment;
 import com.wgmc.whattobuy.fragment.ShopListFragment;
+import com.wgmc.whattobuy.service.FeatureService;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Stack;
 
-    private ContentFragment activeFragment;
-
+public class MainActivity extends AppCompatActivity implements Observer {
     private final NavigationView.OnNavigationItemSelectedListener navigationHandler = new NavigationView.OnNavigationItemSelectedListener() {
     // <editor-fold desc="item handling implementation">
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             ContentFragment toShow = null;
-            System.out.println("item selected");
 
             switch (item.getItemId()) {
                 case R.id.menu_list_buylist:
-                    toShow = new BuylistOverviewFragment();
-                    toShow.setParent(activeFragment);
-                    Bundle args = new Bundle();
-                    args.putBoolean(BuylistListFragment.ARG_EXTENDED_ITEM, false);
-                    toShow.setArguments(args);
+                    // Display the actual shopping list content
+                    // with master detail view
+                    if (!(QueueHolder.viewingFragment instanceof BuylistOverviewFragment)) {
+                        toShow = new BuylistOverviewFragment();
+                    }
                     break;
                 case R.id.menu_list_shop:
-                    toShow = new ShopListFragment();
-                    toShow.setParent(activeFragment);
+                    // Display Overview of Shops
+                    if (!(QueueHolder.viewingFragment instanceof ShopListFragment)) {
+                        toShow = new ShopListFragment();
+                    }
                     break;
                 case R.id.menu_home:
                     // display home screen as well...
-                    toShow = new MainFragment();
-                    toShow.setParent(activeFragment);
+                    if (!(QueueHolder.viewingFragment instanceof MainFragment)) {
+                        toShow = new MainFragment();
+                    }
+                    break;
+                case R.id.menu_settings:
+                    // display settings
+                    if (!(QueueHolder.viewingFragment instanceof SettingsFragment)) {
+                        toShow = new SettingsFragment();
+                    }
+                    break;
+                case R.id.menu_exit:
+                    finish();
                     break;
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
 
-            if (toShow != null)
+            if (toShow != null) {
+                QueueHolder.contentQueue.push(toShow);
                 displayFragment(toShow);
+            }
 
             return true;
         }
@@ -64,10 +80,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FeatureService.getInstance().addObserver(this);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.activity_main_navigation);
         navigationView.setNavigationItemSelectedListener(navigationHandler);
 
-        displayFragment(new MainFragment());
+        QueueHolder.contentQueue.push(QueueHolder.viewingFragment);
+        displayFragment(QueueHolder.viewingFragment);
     }
 
     @Override
@@ -77,21 +96,41 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         }
 
-        int backResult = activeFragment.backAction();
-
+        int backResult = QueueHolder.viewingFragment.backAction();
         processBackAction(backResult);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FeatureService.getInstance().registerSensorFeatures();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FeatureService.getInstance().unregisterSensorFeatures();
+    }
+
     private void processBackAction(int a) {
-        switch (a) {
-            case ContentFragment.MOVE_TO_PARENT_BACK_ACTION:
-                displayFragment(activeFragment.getParent());
-                break;
-            case ContentFragment.NO_BACK_ACTION:
-                return;
-            case ContentFragment.REDIRECT_BACK_ACTION:
+        if (a == ContentFragment.NO_BACK_ACTION)
+            return;
+
+        if (QueueHolder.contentQueue.empty()) {
+            super.onBackPressed();
+            return;
+        }
+
+        QueueHolder.contentQueue.pop();
+        if (!QueueHolder.contentQueue.empty()) {
+            ContentFragment tmp = QueueHolder.contentQueue.peek();
+            if (tmp == null) {
                 super.onBackPressed();
-                break;
+            } else {
+                displayFragment(tmp);
+            }
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -107,17 +146,44 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // react on orientation change and
         // prevent app from crashing when device is rotated
-        displayFragment(activeFragment);
+        displayFragment(QueueHolder.viewingFragment);
     }
 
     private void displayFragment(ContentFragment fragment) {
         FragmentTransaction trans = getFragmentManager().beginTransaction();
+        ContentFragment t = createNewFromClass(fragment, fragment.getArguments());
 
-        if (activeFragment != null)
-            trans.remove(activeFragment);
-        trans.replace(R.id.activity_main_content_frame, fragment);
+        if (QueueHolder.viewingFragment != null)
+            trans.remove(QueueHolder.viewingFragment);
+        trans.replace(R.id.activity_main_content_frame, t);
 
         trans.commit();
-        activeFragment = fragment;
+        QueueHolder.viewingFragment = t;
+    }
+
+    private ContentFragment createNewFromClass(ContentFragment clazzToCreateFrom, Bundle argsForNewFragment) {
+        ContentFragment newInst;
+
+        if (clazzToCreateFrom.getClass().equals(MainFragment.class)) {
+            newInst = new MainFragment();
+        } else if (clazzToCreateFrom.getClass().equals(BuylistOverviewFragment.class)) {
+            newInst = new BuylistOverviewFragment();
+        } else if (clazzToCreateFrom.getClass().equals(ShopListFragment.class)) {
+            newInst = new ShopListFragment();
+        } else {
+            throw new IllegalAccessError();
+        }
+
+        newInst.setArguments(argsForNewFragment);
+        return newInst;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof FeatureService) {
+            if (QueueHolder.viewingFragment instanceof BuylistOverviewFragment) {
+                QueueHolder.viewingFragment.update(o, arg);
+            }
+        }
     }
 }

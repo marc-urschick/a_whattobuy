@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,7 +35,7 @@ public class ItemService extends DefaultService {
     private List<Item> items;
     private SparseArray<Item> assignedItems;
 
-    public static final DateFormat displayDateFormat = new SimpleDateFormat("dd. MM. yyyy");
+    public static final DateFormat displayDateFormat = new SimpleDateFormat("dd. MM. yyyy", Locale.getDefault());
 
     private ItemService() {
         items = new ArrayList<>();
@@ -64,9 +65,9 @@ public class ItemService extends DefaultService {
     }
 
     public void addItem(Item i) {
-        if (i.getId() > 0) {
-            rawAdd(i);
+        if (i.getId() < 0) {
             MainService.getInstance().getDb().createItem(i);
+            rawAdd(i);
         } else {
             MainService.getInstance().getDb().updateItem(i);
         }
@@ -75,8 +76,8 @@ public class ItemService extends DefaultService {
 
     public void removeItem(Item i) {
         if (i.getId() > 0) {
-            rawRemove(i);
             MainService.getInstance().getDb().deleteItem(i);
+            rawRemove(i);
             notifyObservers();
         }
     }

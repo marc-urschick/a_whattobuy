@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.pojo.Item;
 import com.wgmc.whattobuy.pojo.ShoppingList;
+import com.wgmc.whattobuy.service.ItemService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
 import java.text.DateFormat;
@@ -28,6 +29,7 @@ public class ExtendedShoppingListAdapter extends ArrayAdapter<ShoppingList> impl
     public ExtendedShoppingListAdapter(Context context) {
         super(context, R.layout.list_item_shoplist_extended, ShoplistService.getInstance().getShoppingLists());
         ShoplistService.getInstance().addObserver(this);
+        ItemService.getInstance().addObserver(this);
     }
 
     @NonNull
