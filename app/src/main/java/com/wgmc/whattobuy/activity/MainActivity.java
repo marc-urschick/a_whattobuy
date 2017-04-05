@@ -18,7 +18,13 @@ import com.wgmc.whattobuy.fragment.ContentFragment;
 import com.wgmc.whattobuy.fragment.MainFragment;
 import com.wgmc.whattobuy.fragment.SettingsFragment;
 import com.wgmc.whattobuy.fragment.ShopListFragment;
+import com.wgmc.whattobuy.pojo.Shop;
 import com.wgmc.whattobuy.service.FeatureService;
+import com.wgmc.whattobuy.service.ItemService;
+import com.wgmc.whattobuy.service.MainService;
+import com.wgmc.whattobuy.service.SettingsService;
+import com.wgmc.whattobuy.service.ShopService;
+import com.wgmc.whattobuy.service.ShoplistService;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -109,7 +115,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onPause() {
         super.onPause();
-        FeatureService.getInstance().unregisterSensorFeatures();
+        if (FeatureService.getInstance() != null) {
+            FeatureService.getInstance().unregisterSensorFeatures();
+        }
+    }
+
+    @Override
+    public void finish() {
+        FeatureService.destroyInstance();
+        ItemService.destroyInstance();
+        ShoplistService.destroyInstance();
+        ShopService.destroyInstance();
+        MainService.destroyInstance();
+
+        SettingsService.getInstance().saveSettings(this);
+        SettingsService.destroyInstance();
+
+        super.finish();
     }
 
     private void processBackAction(int a) {
@@ -170,6 +192,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
             newInst = new BuylistOverviewFragment();
         } else if (clazzToCreateFrom.getClass().equals(ShopListFragment.class)) {
             newInst = new ShopListFragment();
+        } else if (clazzToCreateFrom.getClass().equals(SettingsFragment.class)) {
+            newInst = new SettingsFragment();
         } else {
             throw new IllegalAccessError();
         }

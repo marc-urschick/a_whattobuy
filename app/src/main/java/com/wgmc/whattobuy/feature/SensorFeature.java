@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 /**
  * Created by proxie on 4.4.17.
@@ -32,11 +33,13 @@ public class SensorFeature {
         this.sensor = sensor;
     }
 
-    public final void registerFeature() {
-        manager.registerListener(eventHandler, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    public void registerFeature() {
+        Log.d(getClass().getSimpleName(), "registering this Feature! (happened:" +
+                manager.registerListener(eventHandler, sensor, SensorManager.SENSOR_DELAY_GAME) + ")");
     }
 
-    public final void unregisterFeature() {
+    public void unregisterFeature() {
+        Log.d(getClass().getSimpleName(), "unregistering this Feature!");
         manager.unregisterListener(eventHandler);
     }
 

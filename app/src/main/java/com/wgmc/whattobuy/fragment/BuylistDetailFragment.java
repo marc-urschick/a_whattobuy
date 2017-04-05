@@ -13,14 +13,17 @@ import android.widget.Adapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.adapter.ExtendedShoppingItemListAdapter;
 import com.wgmc.whattobuy.fragment.dialog.ItemDialogFragment;
 import com.wgmc.whattobuy.fragment.dialog.ShoppingListDialogFragment;
+import com.wgmc.whattobuy.pojo.Item;
 import com.wgmc.whattobuy.pojo.ShoppingList;
 import com.wgmc.whattobuy.service.FeatureService;
 import com.wgmc.whattobuy.service.ItemService;
+import com.wgmc.whattobuy.service.SettingsService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
 import java.util.Observable;
@@ -42,6 +45,7 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
     public BuylistDetailFragment() {
         addObservingService(ShoplistService.getInstance());
         addObservingService(ItemService.getInstance());
+        addObservingService(FeatureService.getInstance());
     }
 
     @Nullable
@@ -57,9 +61,7 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
         list = ShoplistService.getInstance().getShoppingListById((int) getArguments().getLong(ARG_LIST_ID, -1));
         Log.d("Detail Fragment", list == null ? "list is null" : list.toString());
 
-        addButton = (FloatingActionButton) root.findViewById(R.id.frag_bld_add);
-
-        addButton.setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.frag_bld_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment dia = new ItemDialogFragment(list, null);
@@ -87,6 +89,7 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
+        Log.d(getClass().getSimpleName(), observable + " -> " + o);
         if (o instanceof ShoppingList) {
             list = (ShoppingList) o;
 
@@ -105,8 +108,21 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
             if (items != null) {
                 items.setAdapter(createAdapter());
             }
-        } else if (o instanceof FeatureService) {
-            // todo code for check top most unchecked item
+        }
+
+        if (observable instanceof FeatureService) {
+            if (list != null && SettingsService.getInstance().getSetting(SettingsService.SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS).equals(true)) {
+                for (Item i : list.getItems()) {
+                    System.out.println("in list");
+                    if (!i.isChecked()) {
+                        System.out.println("isnt checked");
+                        i.setChecked(true);
+                        ItemService.getInstance().addItem(i);
+                        return;
+                    }
+                }
+                Toast.makeText(getActivity(), "All Items checked already!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

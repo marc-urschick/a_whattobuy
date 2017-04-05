@@ -10,6 +10,7 @@ import com.wgmc.whattobuy.persistence.BuylistOpenHelper;
 import com.wgmc.whattobuy.service.FeatureService;
 import com.wgmc.whattobuy.service.ItemService;
 import com.wgmc.whattobuy.service.MainService;
+import com.wgmc.whattobuy.service.SettingsService;
 import com.wgmc.whattobuy.service.ShopService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
@@ -56,6 +57,8 @@ public class LoadingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        SettingsService.createInstance();
+        SettingsService.getInstance().loadSettings(this);
         ShopService.generateInstance();
         ShoplistService.generateInstance();
         ItemService.generateInstance();
@@ -68,18 +71,12 @@ public class LoadingActivity extends AppCompatActivity {
 
         // redirect to next page
         startActivity(new Intent(this, MainActivity.class));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        MainService.destroyInstance();
     }
 
     private void initShoptypeStrings() {
