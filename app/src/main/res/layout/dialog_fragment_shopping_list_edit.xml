@@ -2,26 +2,27 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!-- Create a Linear Layout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
+            <!-- Create a Table Layout -->
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
+                <!-- Create a Table Row -->
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/fab_margin">
-
+                    <!-- Create a Text View for name -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Name:" />
 
+                    <!-- Create a Edit Text Widget -->
                     <EditText
                         android:id="@+id/dialog_shoppinglist_name"
                         android:layout_width="wrap_content"
@@ -29,17 +30,17 @@
                         android:ems="10"
                         android:inputType="textPersonName" />
                 </TableRow>
-
+                <!-- Create a Table Row -->
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/fab_margin">
-
+                    <!-- Create a Text View -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Shop:" />
-
+                    <!-- Create a Spinner -->
                     <Spinner
                         android:id="@+id/dialog_shoppinglist_shop"
                         android:layout_width="match_parent"
@@ -47,6 +48,8 @@
 
 
                 </TableRow>
+                <!-- Close the Table Row -->
+
 
             </TableLayout>
 
@@ -62,6 +65,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center">
 
+                <!-- Create a Editable Text for the date -->
                 <EditText
                     android:id="@+id/dialog_shoppinglist_duedate"
                     android:layout_width="match_parent"
@@ -72,19 +76,20 @@
 
             </LinearLayout>
 
+            <!-- Create a Linear Layout-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-
+                <!-- Create a Button -->
                 <Button
                     android:id="@+id/dialog_shoppinglist_abort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Abort" />
-
+                <!-- Create a Button -->
                 <Button
                     android:id="@+id/dialog_shoppinglist_commit"
                     android:layout_width="wrap_content"

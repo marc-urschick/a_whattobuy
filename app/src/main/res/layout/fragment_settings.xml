@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <!-- Create a Text View -->
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
@@ -10,43 +10,47 @@
         android:text="@string/menu_settings"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:layout_gravity="center_horizontal"/>
-
+    <!-- Create a Text View -->
     <TextView
         android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_height="@dimen/underline_medium"
         android:background="@color/colorAccent"/>
-
+    <!-- Create a Table Layout -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/activity_vertical_margin">
-
+        <!-- Create a Table Row -->
         <TableRow
             android:gravity="center">
             <TextView
                 android:text="@string/settings_shakeToCheckItems"
                 android:layout_weight="1"/>
-
+            <!-- Create a Switch -->
             <Switch
                 android:id="@+id/settings_shakeToCheckItems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <!-- Close the Table Row -->
         </TableRow>
-
+        <!-- Create a Table Row -->
         <TableRow
             android:gravity="center">
+            <!-- Create a Text View -->
             <TextView
                 android:text="@string/dialog_tooltip_show_tips_on_startup"
                 android:layout_weight="1"/>
-
+            <!-- Create a Switch -->
             <Switch
                 android:id="@+id/settings_show_startup_tipps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </TableRow>
+        <!-- Close the Table Row -->
 
     </TableLayout>
+    <!-- Close the Table Layout -->
 
 </LinearLayout>

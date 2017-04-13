@@ -3,37 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <!-- Create a Text View -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/menu_buylists"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
-
+    <!-- Create a Text View -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/underline_medium"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent" />
-
+    <!-- Create a List View -->
     <ListView
         android:id="@+id/frag_bll_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-
+    <!-- Create a Linear Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
+        <!-- Create a Space -->
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
+        <!-- Create a Button for the new List -->
         <Button
             android:id="@+id/frag_bll_add"
             android:layout_width="0dp"

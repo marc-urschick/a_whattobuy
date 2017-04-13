@@ -13,12 +13,14 @@
     android:backgroundTint="@color/sidebarBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <!-- Create a Image View -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/launcher_icon" />
 
+    <!-- Create a Text View -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"

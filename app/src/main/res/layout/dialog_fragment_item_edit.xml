@@ -3,19 +3,23 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!-- Create a Table Layout -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Create a Table Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name:" />
 
+            <!-- Create a Editable Text fpr Person Name -->
             <EditText
                 android:id="@+id/dialog_item_name"
                 android:layout_width="wrap_content"
@@ -23,16 +27,19 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
         </TableRow>
-
+        <!-- Close Table Row -->
+        <!-- Create a Table Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Infos:" />
 
+            <!-- Create a Editable Text for Person Name -->
             <EditText
                 android:id="@+id/dialog_item_infos"
                 android:layout_width="wrap_content"
@@ -40,16 +47,20 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
         </TableRow>
+        <!-- Close the Table Row and create a new one -->
 
+        <!-- Create a Table Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Menge:" />
 
+            <!-- Create a Editable Text for Person name -->
             <EditText
                 android:id="@+id/dialog_item_menge"
                 android:layout_width="wrap_content"
@@ -66,11 +77,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!-- Create a Space -->
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <!-- Create a Button for Abort -->
         <Button
             android:id="@+id/dialog_item_abort"
             android:layout_width="wrap_content"
@@ -78,6 +91,7 @@
             android:layout_weight="1"
             android:text="Abort" />
 
+        <!-- Create a Button for Delete -->
         <Button
             android:id="@+id/dialog_item_delete"
             android:layout_width="wrap_content"
@@ -85,6 +99,7 @@
             android:layout_weight="1"
             android:text="Delete" />
 
+        <!-- Create a Button for Save -->
         <Button
             android:id="@+id/dialog_item_commit"
             android:layout_width="wrap_content"

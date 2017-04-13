@@ -2,31 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <!-- Create a Text View -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dialog_tooltip_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textAlignment="center"/>
-
+    <!-- Create a Scroll View -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
+        <!-- Create a Text View -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tooltip"/>
     </ScrollView>
-
+    <!-- Create a Check Box -->
     <CheckBox
         android:id="@+id/dialog_tooltip_show_on_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_tooltip_show_tips_on_startup"/>
-
+    <!-- Create a Button -->
     <Button
         android:id="@+id/dialog_tooltip_close"
         android:layout_width="wrap_content"

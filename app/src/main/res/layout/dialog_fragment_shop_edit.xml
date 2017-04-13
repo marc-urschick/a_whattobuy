@@ -3,19 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Create a Table Layout -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <!-- Create a STable Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name:" />
-
+            <!-- Create a Editable Text for Person Name -->
             <EditText
                 android:id="@+id/dialog_shop_name"
                 android:layout_width="wrap_content"
@@ -23,16 +24,18 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
         </TableRow>
+        <!-- Close the Table Row -->
 
+        <!-- Create a Table Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address:" />
-
+            <!-- Create a Edit Text -->
             <EditText
                 android:id="@+id/dialog_shop_address"
                 android:layout_width="wrap_content"
@@ -40,16 +43,16 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
         </TableRow>
-
+        <!-- Create a Table Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type:" />
-
+            <!-- Create a Spinner -->
             <Spinner
                 android:id="@+id/dialog_shop_type"
                 android:layout_width="wrap_content"
@@ -58,15 +61,18 @@
                 android:inputType="textPersonName" />
 
         </TableRow>
+        <!-- Close the Table Row -->
 
     </TableLayout>
 
+    <!-- Create a Linear Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
 
+        <!-- Create a Button -->
         <Button
             android:id="@+id/dialog_shop_abort"
             android:layout_width="wrap_content"
@@ -74,6 +80,7 @@
             android:layout_weight="1"
             android:text="Abort" />
 
+        <!-- Create a Button -->
         <Button
             android:id="@+id/dialog_shop_remove"
             android:layout_width="wrap_content"
@@ -81,6 +88,7 @@
             android:layout_weight="1"
             android:text="Remove"/>
 
+        <!-- Create a Button -->
         <Button
             android:id="@+id/dialog_shop_commit"
             android:layout_width="wrap_content"

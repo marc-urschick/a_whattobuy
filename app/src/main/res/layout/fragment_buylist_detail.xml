@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <!-- Create a Text View -->
     <TextView
         android:id="@+id/frag_bld_title"
         android:layout_width="wrap_content"
@@ -12,14 +12,14 @@
         android:layout_marginLeft="12dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/colorPrimary" />
-
+    <!-- Create a Text View -->
     <TextView
         android:id="@+id/frag_bld_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+    <!-- Create a Text View -->
     <TextView
         android:id="@+id/frag_bld_shop"
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         android:layout_gravity="end"
         android:layout_marginRight="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
+    <!-- Create a List View -->
     <ListView
         android:id="@+id/frag_bld_items"
         android:layout_width="match_parent"
@@ -39,14 +39,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
-
+        <!-- Create a Button -->
         <Button
             android:id="@+id/frag_bld_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Edit Buylist" />
-
+        <!-- Create a Button -->
         <Button
             android:id="@+id/frag_bld_add"
             android:layout_width="0dp"
@@ -54,25 +54,27 @@
             android:layout_weight="1"
             android:text="Create Item" />
     </LinearLayout>
-
+    <!-- Create a Linear Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
-
+        <!-- Create a Button -->
         <Button
             android:id="@+id/frag_bld_remove"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Delete Buylist" />
-
+        <!-- Create a Button -->
         <Button
             android:id="@+id/frag_bld_clear_done"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Delete Checked Items" />
+        <!-- Close the Linear Layout -->
     </LinearLayout>
+    <!-- Close the Linear Layout -->
 </LinearLayout>

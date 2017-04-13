@@ -4,18 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-
+    <!-- Create a Linear Layout -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Create a second Linear Layout -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:orientation="vertical">
 
+            <!-- Create a Text View -->
             <TextView
                 android:id="@+id/shoplist_extended_list_item_name"
                 android:layout_width="wrap_content"
@@ -23,14 +25,16 @@
                 android:text="List Name"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
+            <!-- Create a Text View -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"/>
         </LinearLayout>
+        <!-- Close a Linear Layout -->
 
-
+        <!-- Create a Text View -->
         <TextView
             android:id="@+id/shoplist_extended_list_item_shopname"
             android:layout_width="wrap_content"
@@ -38,43 +42,45 @@
             android:layout_marginLeft="32dp"
             android:text="Shopname"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
-
+        <!-- Create a Text View -->
         <TextView
             android:id="@+id/shoplist_extended_list_item_duedate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:text="Due To: 21.1.2002" />
+        <!-- Close the Linear Layout -->
     </LinearLayout>
 
+    <!-- Create a Space -->
     <Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3" />
-
+    <!-- Create a Button -->
     <Button
         android:id="@+id/shoplist_extended_list_item_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="EDIT"/>
-
+    <!-- Create a Space -->
     <Space
         android:layout_width="8dp"
         android:layout_height="wrap_content" />
-
+    <!-- Create a Button -->
     <Button
         android:id="@+id/shoplist_extended_list_item_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="REMOVE"/>
-
+    <!-- Create a Space -->
     <Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
+    <!-- Create a Text View -->
     <TextView
         android:id="@+id/shoplist_extended_list_item_count"
         android:layout_width="wrap_content"
