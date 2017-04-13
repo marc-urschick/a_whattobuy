@@ -63,7 +63,8 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
         root.findViewById(R.id.frag_bld_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dia = new ItemDialogFragment(list, null);
+                DialogFragment dia = new ItemDialogFragment();
+                ItemDialogFragment.item.setListId(list.getId());
                 dia.show(getFragmentManager(), "Neues Element erstellen");
             }
         });
@@ -71,7 +72,8 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
         root.findViewById(R.id.frag_bld_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dia = new ShoppingListDialogFragment(list);
+                DialogFragment dia = new ShoppingListDialogFragment();
+                ShoppingListDialogFragment.list = list;
                 dia.show(getFragmentManager(), "Edit Shopping List Dialog");
             }
         });

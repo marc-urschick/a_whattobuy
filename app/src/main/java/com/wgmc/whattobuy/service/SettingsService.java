@@ -18,15 +18,9 @@ public class SettingsService extends DefaultService {
     private static SettingsService instance;
 
     public static SettingsService getInstance() {
+        if (instance == null)
+            instance = new SettingsService();
         return instance;
-    }
-
-    public static void createInstance() {
-        instance = new SettingsService();
-    }
-
-    public static void destroyInstance() {
-        instance = null;
     }
 
     private static final String prefName = "com.wgmc.whattobuy.settings";

@@ -21,11 +21,12 @@
 
             <ImageView
                 android:id="@+id/activity_main_hamburger"
-                android:layout_width="34dp"
-                android:layout_height="36dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:foreground="@drawable/ic_navigation" />
+                android:background="@drawable/ic_navigation"
+                android:contentDescription="" />
 
         </RelativeLayout>
 

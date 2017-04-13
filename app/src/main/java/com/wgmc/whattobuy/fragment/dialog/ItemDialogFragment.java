@@ -20,19 +20,16 @@ import com.wgmc.whattobuy.service.ItemService;
  */
 
 public class ItemDialogFragment extends DialogFragment {
-    private ShoppingList list;
-    private Item toEdit;
+    public static ShoppingList list;
+    public static Item item;
 
-    public ItemDialogFragment(ShoppingList list, Item toEdit) {
+    public ItemDialogFragment() {
         super();
-        this.list = list;
-        this.toEdit = toEdit;
 
-        if (this.toEdit == null) {
-            this.toEdit = new Item();
-            this.toEdit.setId(-1);
-            this.toEdit.setListId(list.getId());
-            this.toEdit.setChecked(false);
+        if (item == null) {
+            item = new Item();
+            item.setChecked(false);
+            item.setId(-1L);
         }
     }
 
@@ -41,25 +38,27 @@ public class ItemDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.dialog_fragment_item_edit, container, false);
 
-        if (toEdit != null) {
-            ((EditText) v.findViewById(R.id.dialog_item_name)).setText(toEdit.getName());
-            ((EditText) v.findViewById(R.id.dialog_item_menge)).setText(toEdit.getMenge());
-            ((EditText) v.findViewById(R.id.dialog_item_infos)).setText(toEdit.getInfos());
+        if (item != null) {
+            ((EditText) v.findViewById(R.id.dialog_item_name)).setText(item.getName());
+            ((EditText) v.findViewById(R.id.dialog_item_menge)).setText(item.getMenge());
+            ((EditText) v.findViewById(R.id.dialog_item_infos)).setText(item.getInfos());
 
             v.findViewById(R.id.dialog_item_commit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View vv) {
-                    toEdit.setName(((EditText) v.findViewById(R.id.dialog_item_name)).getText().toString());
-                    toEdit.setInfos(((EditText) v.findViewById(R.id.dialog_item_infos)).getText().toString());
-                    toEdit.setMenge(((EditText) v.findViewById(R.id.dialog_item_menge)).getText().toString());
+                    item.setName(((EditText) v.findViewById(R.id.dialog_item_name)).getText().toString());
+                    item.setInfos(((EditText) v.findViewById(R.id.dialog_item_infos)).getText().toString());
+                    item.setMenge(((EditText) v.findViewById(R.id.dialog_item_menge)).getText().toString());
 
 
-                    boolean newItem = toEdit.getId() < 0;
-                    ItemService.getInstance().addItem(toEdit);
+                    boolean newItem = item.getId() < 0;
+                    ItemService.getInstance().addItem(item);
 
                     if (newItem) {
-                        list.addItem(toEdit);
+                        list.addItem(item);
                     }
+                    list = null;
+                    item = null;
                     dismiss();
                 }
             });
@@ -68,6 +67,8 @@ public class ItemDialogFragment extends DialogFragment {
         v.findViewById(R.id.dialog_item_abort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list = null;
+                item = null;
                 dismiss();
             }
         });
@@ -76,7 +77,9 @@ public class ItemDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 try {
-                    ItemService.getInstance().removeItem(toEdit);
+                    ItemService.getInstance().removeItem(item);
+                    list = null;
+                    item = null;
                     dismiss();
                 } catch (Exception e) {
                     Log.e(ItemDialogFragment.this.getClass().getSimpleName(), "Exception while deleting item!", e);

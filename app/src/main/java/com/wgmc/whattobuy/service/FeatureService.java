@@ -18,15 +18,10 @@ public class FeatureService extends DefaultService {
     private static FeatureService instance;
 
     public static FeatureService getInstance() {
+        if (instance == null) {
+            instance = new FeatureService();
+        }
         return instance;
-    }
-
-    public static void createInstance() {
-        instance = new FeatureService();
-    }
-
-    public static void destroyInstance() {
-        instance = null;
     }
 
     private final Map<Class, SensorFeature> sensorFeatures;

@@ -16,15 +16,9 @@ public class ShopService extends DefaultService {
     private static ShopService instance;
 
     public static ShopService getInstance() {
+        if (instance == null)
+            instance = new ShopService();
         return instance;
-    }
-
-    public static void generateInstance() {
-        instance = new ShopService();
-    }
-
-    public static void destroyInstance() {
-        instance = null;
     }
 
     private List<Shop> shops;

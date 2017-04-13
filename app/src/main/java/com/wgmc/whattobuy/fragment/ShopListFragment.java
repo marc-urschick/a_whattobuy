@@ -25,7 +25,7 @@ public class ShopListFragment extends ContentFragment {
     private ListView list;
 
     public ShopListFragment() {
-        ShopService.getInstance().addObserver(this);
+        addObservingService(ShopService.getInstance());
     }
 
     @Nullable
@@ -42,7 +42,8 @@ public class ShopListFragment extends ContentFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Shop toEdit = (Shop) parent.getItemAtPosition(position);
                 if (toEdit != null) {
-                    DialogFragment dia = new ShopEditDialogFragment(toEdit);
+                    DialogFragment dia = new ShopEditDialogFragment();
+                    ShopEditDialogFragment.heldItem = toEdit;
                     dia.show(getFragmentManager(), "Edit Shop");
                 }
             }
@@ -51,7 +52,7 @@ public class ShopListFragment extends ContentFragment {
         v.findViewById(R.id.frag_shl_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dia = new ShopEditDialogFragment(null);
+                DialogFragment dia = new ShopEditDialogFragment();
                 dia.show(getFragmentManager(), "Create Shop");
             }
         });
@@ -61,6 +62,8 @@ public class ShopListFragment extends ContentFragment {
 
     @Override
     public void update(Observable o, Object arg) {
-        ((ArrayAdapter)list.getAdapter()).notifyDataSetChanged();
+        if (list != null) {
+            ((ArrayAdapter) list.getAdapter()).notifyDataSetChanged();
+        }
     }
 }

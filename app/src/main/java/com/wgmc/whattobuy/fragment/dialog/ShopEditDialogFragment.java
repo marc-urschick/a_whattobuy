@@ -20,16 +20,15 @@ import com.wgmc.whattobuy.service.ShopService;
  */
 
 public class ShopEditDialogFragment extends DialogFragment {
-    private Shop heldItem;
+    public static Shop heldItem;
 
     private EditText name, address;
     private Spinner type;
 
-    public ShopEditDialogFragment(Shop heldItem) {
-        this.heldItem = heldItem;
+    public ShopEditDialogFragment() {
 
         if (heldItem == null) {
-            this.heldItem = new Shop(-1L);
+            heldItem = new Shop(-1L);
         }
     }
 
@@ -57,6 +56,7 @@ public class ShopEditDialogFragment extends DialogFragment {
                 heldItem.setType((Shoptype) type.getSelectedItem());
 
                 ShopService.getInstance().addShop(heldItem);
+                heldItem = null;
                 dismiss();
             }
         });
@@ -64,6 +64,7 @@ public class ShopEditDialogFragment extends DialogFragment {
         v.findViewById(R.id.dialog_shop_abort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                heldItem = null;
                 dismiss();
             }
         });
@@ -71,6 +72,7 @@ public class ShopEditDialogFragment extends DialogFragment {
         v.findViewById(R.id.dialog_shop_remove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                heldItem = null;
                 ShopService.getInstance().removeShop(heldItem);
             }
         });

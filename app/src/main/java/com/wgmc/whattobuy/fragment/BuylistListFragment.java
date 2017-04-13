@@ -73,7 +73,7 @@ public class BuylistListFragment extends ContentFragment implements Observer {
         v.findViewById(R.id.frag_bll_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShoppingListDialogFragment dialog = new ShoppingListDialogFragment(null);
+                ShoppingListDialogFragment dialog = new ShoppingListDialogFragment();
                 dialog.show(getFragmentManager(), "Create Shopping List Dialog");
             }
         });

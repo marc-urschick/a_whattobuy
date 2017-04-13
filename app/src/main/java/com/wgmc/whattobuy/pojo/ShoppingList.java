@@ -17,15 +17,15 @@ public class ShoppingList {
     //Declare the variable whereToBuy with the data typ Shop as a other Class
     private List<Item> items;
     //Declare the variable items with the data typ generic List as a other Class
-    private Date dueTo;
-    //Declare the variable dueTo with the data typ Date
+    private String dueTo;
+    //Declare the variable dueTo with the data typ String
 
     public ShoppingList(long id) {
         this.id = id;
         this.name = "";
         this.whereToBuy = null;
         this.items = new ArrayList<>();
-        this.dueTo = new Date();
+        this.dueTo = "";
         //This is the constructor for the Class ShoppingList and we initate all the declarations
     }
 
@@ -80,12 +80,12 @@ public class ShoppingList {
     }
 
     //Getter for dueTo
-    public Date getDueTo() {
+    public String getDueTo() {
         return dueTo;
     }
 
     //Setter for dueTo
-    public void setDueTo(Date dueTo) {
+    public void setDueTo(String dueTo) {
         this.dueTo = dueTo;
     }
 }

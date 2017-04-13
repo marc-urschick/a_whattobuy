@@ -77,7 +77,7 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
                 SHOPPINGLIST_TABLE_COL_ID + " integer primary key, " +
                 SHOPPINGLIST_TABLE_COL_NAME + " text, " +
                 SHOPPINGLIST_TABLE_COL_SHOPID + " integer, " +
-                SHOPPINGLIST_TABLE_COL_DUETO + " long" +
+                SHOPPINGLIST_TABLE_COL_DUETO + " text" +
             ");";
     // </editor-fold>
 
@@ -280,7 +280,7 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
 
         s.setId(c.getLong(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_ID)));
         s.setName(c.getString(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_NAME)));
-        s.setDueTo(new Date(c.getLong(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_DUETO))));
+        s.setDueTo(c.getString(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_DUETO)));
         s.setWhereToBuy(getShopById(c.getLong(c.getColumnIndex(SHOPPINGLIST_TABLE_COL_SHOPID))));
 
         s.getItems().addAll(getItemsInList(s.getId()));
@@ -293,7 +293,7 @@ public class BuylistOpenHelper extends SQLiteOpenHelper {
 
         vals.put(SHOPPINGLIST_TABLE_COL_NAME, l.getName());
         vals.put(SHOPPINGLIST_TABLE_COL_SHOPID, l.getWhereToBuy().getId());
-        vals.put(SHOPPINGLIST_TABLE_COL_DUETO, l.getDueTo().getTime());
+        vals.put(SHOPPINGLIST_TABLE_COL_DUETO, l.getDueTo());
 
         return vals;
     }

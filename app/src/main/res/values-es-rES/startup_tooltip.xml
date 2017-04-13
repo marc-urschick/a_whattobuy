@@ -2,6 +2,6 @@
 <resources>
 
     <!-- this is the tooltip on the start screen to know whot you must do at beginning in Spain-->
-    <string name="tooltip">Gracias por elegir Qué comprar! \ N \ nWischen desde el borde izquierdo de la pantalla hacia la derecha para abrir el menú.</string>
+    <string name="tooltip">Gracias por elegir Qué comprar! \n\nWischen desde el borde izquierdo de la pantalla hacia la derecha para abrir el menú.</string>
 
 </resources>

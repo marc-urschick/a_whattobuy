@@ -29,19 +29,15 @@ import java.util.Locale;
  */
 
 public class ShoppingListDialogFragment extends DialogFragment {
+    public static ShoppingList list;
 
     private Spinner shop;
     private EditText name;
     private EditText dueDate;
 
-    private ShoppingList list;
-
-    private static final DateFormat inputFormat = new SimpleDateFormat("d.M.yy", Locale.getDefault());
-
-    public ShoppingListDialogFragment(ShoppingList list) {
-        this.list = list;
+    public ShoppingListDialogFragment() {
         if (list == null) {
-            this.list = new ShoppingList(-1L);
+            list = new ShoppingList(-1L);
         }
     }
 
@@ -59,20 +55,23 @@ public class ShoppingListDialogFragment extends DialogFragment {
         if (list != null) {
             name.setText(list.getName());
             shop.setSelection(ShopService.getInstance().getShops().indexOf(list.getWhereToBuy()));
-            dueDate.setText(inputFormat.format(list.getDueTo()));
+            dueDate.setText(list.getDueTo());
         }
 
         v.findViewById(R.id.dialog_shoppinglist_commit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (persistInputs())
+                if (persistInputs()) {
+                    list = null;
                     dismiss();
+                }
             }
         });
 
         v.findViewById(R.id.dialog_shoppinglist_abort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list = null;
                 dismiss();
             }
         });
@@ -93,7 +92,7 @@ public class ShoppingListDialogFragment extends DialogFragment {
             }
 
             list.setName(name);
-            list.setDueTo(inputFormat.parse(dueDate.getText().toString()));
+            list.setDueTo(dueDate.getText().toString());
             list.setWhereToBuy(whereToBuy);
 
             ShoplistService.getInstance().addShoppingList(list);

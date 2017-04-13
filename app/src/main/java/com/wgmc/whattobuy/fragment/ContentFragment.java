@@ -3,6 +3,7 @@ package com.wgmc.whattobuy.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.wgmc.whattobuy.service.DefaultService;
 
@@ -38,6 +39,7 @@ public abstract class ContentFragment extends Fragment implements Observer {
         super.onCreate(savedInstanceState);
 //        setRetainInstance(true);
         for (DefaultService s : observingServices) {
+            Log.d(getClass().getSimpleName() + "-> adding to observers", "s: " + s + ", instof" + s.getClass().getSimpleName());
             s.addObserver(this);
         }
     }

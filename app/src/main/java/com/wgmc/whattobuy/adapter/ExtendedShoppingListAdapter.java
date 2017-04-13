@@ -28,7 +28,6 @@ import java.util.Observer;
  */
 
 public class ExtendedShoppingListAdapter extends ArrayAdapter<ShoppingList> implements Observer {
-    private static final DateFormat outFormat = DateFormat.getDateInstance();
     private final Activity host;
     private final BuylistOverviewFragment master;
 
@@ -49,7 +48,7 @@ public class ExtendedShoppingListAdapter extends ArrayAdapter<ShoppingList> impl
 
         if (item != null) {
             ((TextView) view.findViewById(R.id.shoplist_extended_list_item_name)).setText(item.getName());
-            ((TextView) view.findViewById(R.id.shoplist_extended_list_item_duedate)).setText(outFormat.format(item.getDueTo()));
+            ((TextView) view.findViewById(R.id.shoplist_extended_list_item_duedate)).setText(item.getDueTo());
             ((TextView) view.findViewById(R.id.shoplist_extended_list_item_shopname)).setText(item.getWhereToBuy().getName());
 
             int all = 0, done = 0;
@@ -66,7 +65,8 @@ public class ExtendedShoppingListAdapter extends ArrayAdapter<ShoppingList> impl
             view.findViewById(R.id.shoplist_extended_list_item_edit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogFragment dia = new ShoppingListDialogFragment(item);
+                    DialogFragment dia = new ShoppingListDialogFragment();
+                    ShoppingListDialogFragment.list = item;
                     dia.show(host.getFragmentManager(), "Edit Shopping List Dialog");
                 }
             });

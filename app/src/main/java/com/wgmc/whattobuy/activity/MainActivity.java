@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.wgmc.whattobuy.R;
+import com.wgmc.whattobuy.feature.ShakeSensorFeature;
 import com.wgmc.whattobuy.fragment.BuylistListFragment;
 import com.wgmc.whattobuy.fragment.BuylistOverviewFragment;
 import com.wgmc.whattobuy.fragment.ContentFragment;
@@ -21,6 +22,7 @@ import com.wgmc.whattobuy.fragment.MainFragment;
 import com.wgmc.whattobuy.fragment.SettingsFragment;
 import com.wgmc.whattobuy.fragment.ShopListFragment;
 import com.wgmc.whattobuy.fragment.dialog.BeginTooltipDialogFragment;
+import com.wgmc.whattobuy.persistence.BuylistOpenHelper;
 import com.wgmc.whattobuy.pojo.Shop;
 import com.wgmc.whattobuy.service.FeatureService;
 import com.wgmc.whattobuy.service.ItemService;
@@ -32,6 +34,28 @@ import com.wgmc.whattobuy.service.ShoplistService;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
+
+import static com.wgmc.whattobuy.pojo.Shoptype.ANIMALS;
+import static com.wgmc.whattobuy.pojo.Shoptype.BUILDING_SUPPLIES;
+import static com.wgmc.whattobuy.pojo.Shoptype.CAFE;
+import static com.wgmc.whattobuy.pojo.Shoptype.CHEMICALS;
+import static com.wgmc.whattobuy.pojo.Shoptype.CLOTHS;
+import static com.wgmc.whattobuy.pojo.Shoptype.COSMETICS;
+import static com.wgmc.whattobuy.pojo.Shoptype.DRUGS;
+import static com.wgmc.whattobuy.pojo.Shoptype.FURNITURE;
+import static com.wgmc.whattobuy.pojo.Shoptype.GIFTS;
+import static com.wgmc.whattobuy.pojo.Shoptype.GROCERY;
+import static com.wgmc.whattobuy.pojo.Shoptype.LIQUOR;
+import static com.wgmc.whattobuy.pojo.Shoptype.LITERATURE;
+import static com.wgmc.whattobuy.pojo.Shoptype.MEDIA;
+import static com.wgmc.whattobuy.pojo.Shoptype.OFFICE_SUPPLIES;
+import static com.wgmc.whattobuy.pojo.Shoptype.OTHER;
+import static com.wgmc.whattobuy.pojo.Shoptype.PLANTS;
+import static com.wgmc.whattobuy.pojo.Shoptype.RESTAURANT;
+import static com.wgmc.whattobuy.pojo.Shoptype.SERVICES;
+import static com.wgmc.whattobuy.pojo.Shoptype.TECHNIC;
+import static com.wgmc.whattobuy.pojo.Shoptype.TOYS;
+import static com.wgmc.whattobuy.pojo.Shoptype.VEHICLES;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     private final NavigationView.OnNavigationItemSelectedListener navigationHandler = new NavigationView.OnNavigationItemSelectedListener() {
@@ -112,7 +136,34 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        // init persistence
+        BuylistOpenHelper database = new BuylistOpenHelper(this);
+        initShoptypeStrings(); // init Strings after Resource Loading
+
+        // init Services
+        /// main service on which all other services rely on
+        MainService.getInstance();
+        try {
+            //// set persistence of main service
+            MainService.getInstance().setDb(database);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /// init settings service
+        SettingsService.getInstance();
+
+        /// init pojo services
+        ShopService.getInstance();
+        ShoplistService.getInstance();
+        ItemService.getInstance();
+
+        /// init feature managment
+        FeatureService.getInstance();
+
+        //// init sensors und features
+        ShakeSensorFeature ssf = new ShakeSensorFeature(this);
+        FeatureService.getInstance().addSensorFeature(ssf);
 
         // load settings from saved state
         SettingsService.getInstance().initSettingKeys(this);
@@ -147,6 +198,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
         if (SettingsService.getInstance().getSetting(SettingsService.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL).equals("true")) {
             new BeginTooltipDialogFragment().show(getFragmentManager(), "tooltips");
         }
+
+        // call super method
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -192,27 +246,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onStop() {
         super.onStop();
-
-        // destroy all services as they must not exist in stopped state
-        FeatureService.destroyInstance();
-        ItemService.destroyInstance();
-        ShoplistService.destroyInstance();
-        ShopService.destroyInstance();
-        MainService.destroyInstance();
-        SettingsService.destroyInstance();
-    }
-
-    @Override
-    public void onDestroy() {
-        // removing all pointers to fragments for garbage collection and move the
-        // queue back to beginning basically
-        FragmentHolder.LIST_FRAGMENT = null;
-        FragmentHolder.DETAIL_FRAGMENT = null;
-        QueueHolder.viewingFragment = new MainFragment();
-        QueueHolder.contentQueue.clear();
-
-        // call the super method as well
-        super.onDestroy();
     }
 
     /**
@@ -333,5 +366,31 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 QueueHolder.viewingFragment.update(o, arg);
             }
         }
+    }
+
+    // Strings are loaded after classes, therefore corresponding translated
+    //   strings for the enum has to be assigned during runtime
+    private void initShoptypeStrings() {
+        GROCERY.setShownAs(getString(R.string.shoptype_grocery));
+        TECHNIC.setShownAs(getString(R.string.shoptype_technic));
+        CLOTHS.setShownAs(getString(R.string.shoptype_cloths));
+        LIQUOR.setShownAs(getString(R.string.shoptype_liquor));
+        FURNITURE.setShownAs(getString(R.string.shoptype_furniture));
+        ANIMALS.setShownAs(getString(R.string.shoptype_animals));
+        PLANTS.setShownAs(getString(R.string.shoptype_plants));
+        LITERATURE.setShownAs(getString(R.string.shoptype_literature));
+        OFFICE_SUPPLIES.setShownAs(getString(R.string.shoptype_office));
+        TOYS.setShownAs(getString(R.string.shoptype_toys));
+        BUILDING_SUPPLIES.setShownAs(getString(R.string.shoptype_building));
+        CHEMICALS.setShownAs(getString(R.string.shoptype_chemicals));
+        DRUGS.setShownAs(getString(R.string.shoptype_drugs));
+        GIFTS.setShownAs(getString(R.string.shoptype_gifts));
+        MEDIA.setShownAs(getString(R.string.shoptype_media));
+        COSMETICS.setShownAs(getString(R.string.shoptype_cosmetic));
+        SERVICES.setShownAs(getString(R.string.shoptype_services));
+        VEHICLES.setShownAs(getString(R.string.shoptype_vehicles));
+        RESTAURANT.setShownAs(getString(R.string.shoptype_restaurant));
+        CAFE.setShownAs(getString(R.string.shoptype_cafe));
+        OTHER.setShownAs(getString(R.string.shoptype_other));
     }
 }

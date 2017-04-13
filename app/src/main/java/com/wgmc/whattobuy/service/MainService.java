@@ -12,21 +12,9 @@ public class MainService extends DefaultService {
     private static MainService instance;
 
     public static MainService getInstance() {
+        if (instance == null)
+            instance = new MainService();
         return instance;
-    }
-
-    public static void generateInstance() throws IllegalStateException {
-        if (instance != null) {
-            throw new IllegalStateException("There can only be one instance of MainService");
-        }
-        instance = new MainService();
-    }
-
-    public static void destroyInstance() throws IllegalStateException {
-        if (instance == null) {
-            throw new IllegalStateException("No instance present to be destroyed");
-        }
-        instance = null;
     }
 
     private SharedPreferences preferences;

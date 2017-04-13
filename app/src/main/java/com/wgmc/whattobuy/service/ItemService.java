@@ -18,15 +18,10 @@ import java.util.Observer;
  */
 
 public class ItemService extends DefaultService {
-    public static void generateInstance() {
-        instance = new ItemService();
-    }
-
-    public static void destroyInstance() {
-        instance = null;
-    }
-
     public static ItemService getInstance() {
+        if (instance == null) {
+            instance = new ItemService();
+        }
         return instance;
     }
 

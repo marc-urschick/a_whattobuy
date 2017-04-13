@@ -18,15 +18,9 @@ import java.util.Observer;
  */
 
 public class ShoplistService extends DefaultService {
-    public static void generateInstance() {
-        instance = new ShoplistService();
-    }
-
-    public static void destroyInstance() {
-        instance = null;
-    }
-
     public static ShoplistService getInstance() {
+        if (instance == null)
+            instance = new ShoplistService();
         return instance;
     }
 

@@ -33,7 +33,6 @@
     <string name="menu_shop">Shop</string>
     <string name="menu_settings">Einstellungen</string>
     <string name="shop_list_title">Shops</string>
-    <string name="tooltip">Gracias por elegir Qué comprar! Limpie para abrir el menú desde el borde izquierdo de la pantalla hacia la derecha.</string>
     <string name="settings_shakeToCheckItems">Los productos que marque la sacudida</string>
     <string name="exit">salida</string>
     <string name="action_settings">ajustes</string>
