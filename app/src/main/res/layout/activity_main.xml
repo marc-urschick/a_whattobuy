@@ -10,15 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Create a Relative Layout -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <!-- Create a Frame Layout in the Relative Layout -->
             <FrameLayout
                 android:id="@+id/activity_main_content_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
+            <!-- Create a Image View in the Frame Layout -->
             <ImageView
                 android:id="@+id/activity_main_hamburger"
                 android:layout_width="60dp"
@@ -27,7 +28,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/ic_navigation"
                 android:contentDescription="" />
-
+            <!-- Close the Relative Layout -->
         </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
