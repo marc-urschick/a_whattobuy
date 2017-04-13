@@ -84,10 +84,20 @@ public class MainActivity extends AppCompatActivity implements Observer {
     };
     // </editor-fold>
 
+    /**
+     *
+     * @param key the key of the preference
+     * @return true if the preference is already in the settings management or if it needs to be created
+     */
     private boolean settingExists(String key) {
         return SettingsService.getInstance().getSettings().containsKey(key);
     }
 
+    /**
+     * create settings and put them into the settings management if they
+     * do not exist
+     * they might not exist if the app has been updated or newly installed
+     */
     private void installNonExistentSettings() {
         if (!settingExists(SettingsService.SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS)) {
             SettingsService.getInstance()
@@ -120,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         final NavigationView navigationView = (NavigationView) findViewById(R.id.activity_main_navigation);
         navigationView.setNavigationItemSelectedListener(navigationHandler);
 
+        // set action for menu hamburger to open the menu drawer
         findViewById(R.id.activity_main_hamburger).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,36 +151,49 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void onBackPressed() {
+        // close drawer when opened
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
 
+        // delegating the back action to the fragment (the fragment might not want the activity
+        // to handle the back action
         int backResult = QueueHolder.viewingFragment.backAction();
+        // after getting the information who needs to do what the action is processed
         processBackAction(backResult);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        // register features for working actions and functionality
         if (FeatureService.getInstance() != null)
             FeatureService.getInstance().registerSensorFeatures();
+
+        // load settings for integrity
         SettingsService.getInstance().loadSettings(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        // unregister features so they don't do stuff in background they shouldn't do
         if (FeatureService.getInstance() != null) {
             FeatureService.getInstance().unregisterSensorFeatures();
         }
 
+        // save settings for resuming again
         SettingsService.getInstance().saveSettings(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+
+        // destroy all services as they must not exist in stopped state
         FeatureService.destroyInstance();
         ItemService.destroyInstance();
         ShoplistService.destroyInstance();
@@ -180,10 +204,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void onDestroy() {
+        // removing all pointers to fragments for garbage collection and move the
+        // queue back to beginning basically
         FragmentHolder.LIST_FRAGMENT = null;
         FragmentHolder.DETAIL_FRAGMENT = null;
         QueueHolder.viewingFragment = new MainFragment();
         QueueHolder.contentQueue.clear();
+
+        // call the super method as well
         super.onDestroy();
     }
 
@@ -192,23 +220,35 @@ public class MainActivity extends AppCompatActivity implements Observer {
      * @param a Type defined in ContentFragment which specifies what the processing should do
      */
     private void processBackAction(int a) {
+        // when the activity has nothing to do just return back and do nothing
         if (a == ContentFragment.NO_BACK_ACTION)
             return;
 
+        // otherwise move back to the previous view if present
+        // if view not present (is the first one) then the activity is closed (parent back
+        // action is doing basically the same)
         if (QueueHolder.contentQueue.empty()) {
             super.onBackPressed();
             return;
         }
 
+        // if present move back
         QueueHolder.contentQueue.pop();
+
+        // again if no parent is present then do the same
         if (!QueueHolder.contentQueue.empty()) {
+            // get the parent view and try to display it
             ContentFragment tmp = QueueHolder.contentQueue.peek();
+            // if null it is not present (...)
             if (tmp == null) {
                 super.onBackPressed();
+
+            // if present just display it
             } else {
                 displayFragment(tmp);
             }
         } else {
+            // there was no parent so delegate to super...
             super.onBackPressed();
         }
     }
@@ -228,6 +268,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
         displayFragment(QueueHolder.viewingFragment);
     }
 
+    /**
+     * Create a new instance (for integrity) of the given Fragment (content fragment)
+     * and replace the existing content on the screen with the new one that shall be displayed
+     * @param fragment FragmentClass that should be displayed
+     */
     private void displayFragment(ContentFragment fragment) {
         FragmentTransaction trans = getFragmentManager().beginTransaction();
         ContentFragment t = createNewFromClass(fragment, fragment.getArguments());
@@ -241,12 +286,22 @@ public class MainActivity extends AppCompatActivity implements Observer {
         trans.commit();
     }
 
+    /**
+     *
+     * @return return actual fragment that is basically topmost on the content queue
+     */
     private Fragment getActFragmentFromQueue() {
         return QueueHolder.viewingFragment instanceof SettingsFragment ?
                 ((SettingsFragment) QueueHolder.viewingFragment) :
                 QueueHolder.viewingFragment;
     }
 
+    /**
+     *
+     * @param clazzToCreateFrom class which new content fragment shall be instance of
+     * @param argsForNewFragment arguments for the fragment if needed
+     * @return new instance of the same fragment
+     */
     private ContentFragment createNewFromClass(ContentFragment clazzToCreateFrom, Bundle argsForNewFragment) {
         ContentFragment newInst;
 
@@ -266,6 +321,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
         return newInst;
     }
 
+    /**
+     * delegating feature notificaton (when a feature has some update to be processed) to this class
+     * @param o
+     * @param arg
+     */
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof FeatureService) {
