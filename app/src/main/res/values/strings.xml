@@ -1,5 +1,5 @@
 <resources>
-    <!-- Shoptypes: -->
+    <!-- Shoptypes: for the shoptype enum pojo in English -->
     <string name="shoptype_grocery">Groceries</string>
     <string name="shoptype_technic">Technicals</string>
     <string name="shoptype_cosmetic">Cosmetics</string>

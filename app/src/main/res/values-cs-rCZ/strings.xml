@@ -3,7 +3,7 @@
 
     <string name="app_name">Co si koupit</string>
 
-    <!-- Shoptypes: -->
+    <!-- Shoptypes: for the shoptype enum pojo in Tschechisch -->
     <string name="shoptype_animals">Domácí zvířata a chovatelských potřeb</string>
     <string name="shoptype_building">stavební materiály</string>
     <string name="shoptype_cafe">Kaváren a barů</string>

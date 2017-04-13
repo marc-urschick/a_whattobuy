@@ -3,7 +3,7 @@
 
     <string name="app_name">Qué comprar</string>
 
-    <!-- Shoptypes: -->
+    <!-- Shoptypes: for the shoptype enum pojo in Spanish -->
     <string name="shoptype_animals">Se admiten mascotas y suministros</string>
     <string name="shoptype_building">Los materiales de construcción</string>
     <string name="shoptype_cafe">Cafés y bares</string>

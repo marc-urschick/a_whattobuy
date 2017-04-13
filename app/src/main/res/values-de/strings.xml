@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">What To Buy</string>
 
-    <!-- Shoptypes: -->
+    <!-- Shoptypes: for the shoptype enum pojo in German -->
     <string name="shoptype_animals">Haustiere und Tierbedarf</string>
     <string name="shoptype_building">Baumaterialien</string>
     <string name="shoptype_cafe">Kaffeehäuser und Bars</string>
