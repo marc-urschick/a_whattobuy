@@ -35,9 +35,18 @@
                 android:layout_height="wrap_content"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:text="@string/dialog_tooltip_show_tips_on_startup"
+                android:layout_weight="1"/>
 
+            <Switch
+                android:id="@+id/settings_show_startup_tipps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </TableRow>
+
     </TableLayout>
 
 </LinearLayout>

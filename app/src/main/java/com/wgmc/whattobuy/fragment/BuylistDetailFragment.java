@@ -38,7 +38,6 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
 
     private TextView title, date, shop;
     private ListView items;
-    private FloatingActionButton addButton;
 
     private ShoppingList list;
 

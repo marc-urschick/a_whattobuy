@@ -69,7 +69,7 @@ public class ShakeSensorFeature extends SensorFeature {
                 double random = Math.random();
                 random *= 14;
                 random = Math.sqrt(Math.abs(random));
-                System.out.println(random);
+//                System.out.println(random);
                 // get sensor data
                 float x = se.values[SensorManager.DATA_X];
                 float y = se.values[SensorManager.DATA_Y];
@@ -143,5 +143,14 @@ public class ShakeSensorFeature extends SensorFeature {
                     FeatureService.getInstance().notifyObservers(SHAKE_HAPPENED);
             }
         });
+    }
+
+    public ShakeSensorFeature() {
+        super(null);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ShakeSensorFeature;
     }
 }

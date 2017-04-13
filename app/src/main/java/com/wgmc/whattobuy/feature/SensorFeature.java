@@ -15,10 +15,13 @@ public class SensorFeature {
     private Sensor sensor;
     private SensorEventListener eventHandler;
 
+    private boolean featureEnabled;
+
     public SensorFeature(Context context, Sensor sensor, SensorEventListener eventHandler) {
         manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         this.sensor = sensor;
         this.eventHandler = eventHandler;
+        featureEnabled = true;
     }
 
     public SensorFeature(Context context) {
@@ -45,5 +48,13 @@ public class SensorFeature {
 
     protected SensorManager getManager() {
         return manager;
+    }
+
+    public boolean isFeatureEnabled() {
+        return featureEnabled;
+    }
+
+    public void setFeatureEnabled(boolean featureEnabled) {
+        this.featureEnabled = featureEnabled;
     }
 }

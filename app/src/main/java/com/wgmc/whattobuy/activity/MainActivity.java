@@ -1,5 +1,6 @@
 package com.wgmc.whattobuy.activity;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.fragment.BuylistListFragment;
@@ -18,6 +20,7 @@ import com.wgmc.whattobuy.fragment.ContentFragment;
 import com.wgmc.whattobuy.fragment.MainFragment;
 import com.wgmc.whattobuy.fragment.SettingsFragment;
 import com.wgmc.whattobuy.fragment.ShopListFragment;
+import com.wgmc.whattobuy.fragment.dialog.BeginTooltipDialogFragment;
 import com.wgmc.whattobuy.pojo.Shop;
 import com.wgmc.whattobuy.service.FeatureService;
 import com.wgmc.whattobuy.service.ItemService;
@@ -32,7 +35,7 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements Observer {
     private final NavigationView.OnNavigationItemSelectedListener navigationHandler = new NavigationView.OnNavigationItemSelectedListener() {
-    // <editor-fold desc="item handling implementation">
+        // <editor-fold desc="item handling implementation">
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             ContentFragment toShow = null;
@@ -81,18 +84,58 @@ public class MainActivity extends AppCompatActivity implements Observer {
     };
     // </editor-fold>
 
+    private boolean settingExists(String key) {
+        return SettingsService.getInstance().getSettings().containsKey(key);
+    }
+
+    private void installNonExistentSettings() {
+        if (!settingExists(SettingsService.SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS)) {
+            SettingsService.getInstance()
+                    .putSetting(SettingsService.SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS, false);
+        }
+
+        if (!settingExists(SettingsService.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL)) {
+            SettingsService.getInstance()
+                    .putSetting(SettingsService.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL, true);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // load settings from saved state
+        SettingsService.getInstance().initSettingKeys(this);
+        SettingsService.getInstance().loadSettings(this);
+        // create all settings if not present (after update or first install or so)
+        installNonExistentSettings();
+
+        // set content to main engine file
         setContentView(R.layout.activity_main);
 
+        // add this activity to observe the features
         FeatureService.getInstance().addObserver(this);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.activity_main_navigation);
+        // find navigation sidebar (sidemenu that slides open) and assign action handling
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.activity_main_navigation);
         navigationView.setNavigationItemSelectedListener(navigationHandler);
 
+        findViewById(R.id.activity_main_hamburger).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.openDrawer(GravityCompat.START);
+            }
+        });
+
+        // push opening fragment to queueing list and display it
         QueueHolder.contentQueue.push(QueueHolder.viewingFragment);
         displayFragment(QueueHolder.viewingFragment);
+
+        // show welcome screen (tooltips) if enabled
+        if (SettingsService.getInstance().getSetting(SettingsService.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL).equals("true")) {
+            new BeginTooltipDialogFragment().show(getFragmentManager(), "tooltips");
+        }
     }
 
     @Override
@@ -109,7 +152,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onResume() {
         super.onResume();
-        FeatureService.getInstance().registerSensorFeatures();
+        if (FeatureService.getInstance() != null)
+            FeatureService.getInstance().registerSensorFeatures();
+        SettingsService.getInstance().loadSettings(this);
     }
 
     @Override
@@ -118,22 +163,34 @@ public class MainActivity extends AppCompatActivity implements Observer {
         if (FeatureService.getInstance() != null) {
             FeatureService.getInstance().unregisterSensorFeatures();
         }
+
+        SettingsService.getInstance().saveSettings(this);
     }
 
     @Override
-    public void finish() {
+    protected void onStop() {
+        super.onStop();
         FeatureService.destroyInstance();
         ItemService.destroyInstance();
         ShoplistService.destroyInstance();
         ShopService.destroyInstance();
         MainService.destroyInstance();
-
-        SettingsService.getInstance().saveSettings(this);
         SettingsService.destroyInstance();
-
-        super.finish();
     }
 
+    @Override
+    public void onDestroy() {
+        FragmentHolder.LIST_FRAGMENT = null;
+        FragmentHolder.DETAIL_FRAGMENT = null;
+        QueueHolder.viewingFragment = new MainFragment();
+        QueueHolder.contentQueue.clear();
+        super.onDestroy();
+    }
+
+    /**
+     *
+     * @param a Type defined in ContentFragment which specifies what the processing should do
+     */
     private void processBackAction(int a) {
         if (a == ContentFragment.NO_BACK_ACTION)
             return;
@@ -176,11 +233,18 @@ public class MainActivity extends AppCompatActivity implements Observer {
         ContentFragment t = createNewFromClass(fragment, fragment.getArguments());
 
         if (QueueHolder.viewingFragment != null)
-            trans.remove(QueueHolder.viewingFragment);
-        trans.replace(R.id.activity_main_content_frame, t);
+            trans.remove(getActFragmentFromQueue());
+
+        QueueHolder.viewingFragment = t;
+        trans.replace(R.id.activity_main_content_frame, getActFragmentFromQueue());
 
         trans.commit();
-        QueueHolder.viewingFragment = t;
+    }
+
+    private Fragment getActFragmentFromQueue() {
+        return QueueHolder.viewingFragment instanceof SettingsFragment ?
+                ((SettingsFragment) QueueHolder.viewingFragment) :
+                QueueHolder.viewingFragment;
     }
 
     private ContentFragment createNewFromClass(ContentFragment clazzToCreateFrom, Bundle argsForNewFragment) {

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.pojo.Item;
@@ -23,6 +24,7 @@ public class ItemDialogFragment extends DialogFragment {
     private Item toEdit;
 
     public ItemDialogFragment(ShoppingList list, Item toEdit) {
+        super();
         this.list = list;
         this.toEdit = toEdit;
 
@@ -67,6 +69,19 @@ public class ItemDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+            }
+        });
+
+        v.findViewById(R.id.dialog_item_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    ItemService.getInstance().removeItem(toEdit);
+                    dismiss();
+                } catch (Exception e) {
+                    Log.e(ItemDialogFragment.this.getClass().getSimpleName(), "Exception while deleting item!", e);
+                    Toast.makeText(getActivity(), "An error occurred. Please try again!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.pwittchen.swipe.library.Swipe;
 import com.github.pwittchen.swipe.library.SwipeListener;
@@ -48,58 +49,6 @@ public class ExtendedShoppingItemListAdapter extends ArrayAdapter<Item> implemen
         final View v = inflater.inflate(R.layout.list_item_shoplistitem_extended, parent, false);
         final Item item = getItem(position);
 
-        final Swipe sw = new Swipe();
-
-//        v.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                sw.dispatchTouchEvent(event);
-//                return true;
-//            }
-//        });
-
-        sw.addListener(new SwipeListener() {
-            @Override
-            public void onSwipingLeft(MotionEvent event) {
-
-            }
-
-            @Override
-            public void onSwipedLeft(MotionEvent event) {
-                editAction(item);
-            }
-
-            @Override
-            public void onSwipingRight(MotionEvent event) {
-
-            }
-
-            @Override
-            public void onSwipedRight(MotionEvent event) {
-                System.out.println("swiped right");
-            }
-
-            @Override
-            public void onSwipingUp(MotionEvent event) {
-
-            }
-
-            @Override
-            public void onSwipedUp(MotionEvent event) {
-
-            }
-
-            @Override
-            public void onSwipingDown(MotionEvent event) {
-
-            }
-
-            @Override
-            public void onSwipedDown(MotionEvent event) {
-
-            }
-        });
-
         if (item != null) {
             CheckBox cb = ((CheckBox)v.findViewById(R.id.shoplist_item_extended_list_item_checked));
 
@@ -110,24 +59,16 @@ public class ExtendedShoppingItemListAdapter extends ArrayAdapter<Item> implemen
 
             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    item.setChecked(((CheckBox) v.findViewById(R.id.shoplist_item_extended_list_item_checked)).isChecked());
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    item.setChecked(isChecked);
 //                    ((TextView)v.findViewById(R.id.shoplist_item_extended_list_item_name)); // todo strike text out
-                    // TODO: 10.03.17 update change i guess
                 }
             });
 
-            v.findViewById(R.id.shoplist_item_extended_list_item_edit_button).setOnClickListener(new View.OnClickListener() {
+            v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     editAction(item);
-                }
-            });
-
-            v.findViewById(R.id.shoplist_item_extended_list_item_remove_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    deleteAction(item);
                 }
             });
         }
@@ -143,9 +84,5 @@ public class ExtendedShoppingItemListAdapter extends ArrayAdapter<Item> implemen
     private void editAction(Item i) {
         DialogFragment d = new ItemDialogFragment(list, i);
         d.show(fragmentManager, "Edit Item");
-    }
-
-    private void deleteAction(Item item) {
-        ItemService.getInstance().removeItem(item);
     }
 }

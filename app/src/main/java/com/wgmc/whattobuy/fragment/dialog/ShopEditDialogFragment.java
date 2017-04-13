@@ -68,6 +68,13 @@ public class ShopEditDialogFragment extends DialogFragment {
             }
         });
 
+        v.findViewById(R.id.dialog_shop_remove).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShopService.getInstance().removeShop(heldItem);
+            }
+        });
+
         return v;
     }
 }

@@ -35,13 +35,11 @@ public class BuylistOverviewFragment extends ContentFragment {
         View root = inflater.inflate(R.layout.fragment_buylist_overview, container, false);
         dual = root.findViewById(R.id.frag_bl_ov_detail) != null;
 
-//        if (FragmentHolder.LIST_FRAGMENT == null) {
-            Bundle listArgs = new Bundle();
-            listArgs.putBoolean(BuylistListFragment.ARG_EXTENDED_ITEM, !dual);
-            FragmentHolder.LIST_FRAGMENT = new BuylistListFragment();
-            FragmentHolder.LIST_FRAGMENT.setParent(this);
-            FragmentHolder.LIST_FRAGMENT.setArguments(listArgs);
-//        }
+        Bundle listArgs = new Bundle();
+        listArgs.putBoolean(BuylistListFragment.ARG_EXTENDED_ITEM, !dual);
+        FragmentHolder.LIST_FRAGMENT = new BuylistListFragment();
+        FragmentHolder.LIST_FRAGMENT.setParent(this);
+        FragmentHolder.LIST_FRAGMENT.setArguments(listArgs);
 
         if (dual) {
             fm.beginTransaction().replace(R.id.frag_bl_ov_list, FragmentHolder.LIST_FRAGMENT).commit();

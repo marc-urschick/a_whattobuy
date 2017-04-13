@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS">enshtochit</string>
+    <string name="SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL">shsttotu</string>
+</resources>

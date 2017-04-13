@@ -3,6 +3,7 @@ package com.wgmc.whattobuy.service;
 import android.util.SparseArray;
 
 import com.wgmc.whattobuy.pojo.Shop;
+import com.wgmc.whattobuy.pojo.ShoppingList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,7 @@ public class ShopService extends DefaultService {
         shops = new ArrayList<>();
         assignedShops = new SparseArray<>();
 
-        System.out.println("init shops");
         for (Shop s : MainService.getInstance().getDb().getAllShops()) {
-            System.out.println("in loop");
             rawAdd(s);
         }
     }
@@ -60,8 +59,8 @@ public class ShopService extends DefaultService {
 
     public void addShop(Shop s) {
         if (s.getId() < 0) {
-            rawAdd(s);
             MainService.getInstance().getDb().createShop(s);
+            rawAdd(s);
         } else {
             MainService.getInstance().getDb().updateShop(s);
         }
@@ -69,10 +68,18 @@ public class ShopService extends DefaultService {
     }
 
     public void removeShop(Shop s) {
-        if (s.getId() > 0) {
-            rawRemove(s);
+        long sid = s.getId();
+
+        if (sid > 0) {
             MainService.getInstance().getDb().deleteShop(s);
+            rawRemove(s);
             notifyObservers();
+
+            for (ShoppingList list : ShoplistService.getInstance().getShoppingLists()) {
+                if (list.getWhereToBuy().getId() == sid) {
+                    ShoplistService.getInstance().removeShoppingList(list);
+                }
+            }
         }
     }
 }

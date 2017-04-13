@@ -3,6 +3,7 @@ package com.wgmc.whattobuy.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class BuylistListFragment extends ContentFragment implements Observer {
         boolean ext = args.getBoolean(ARG_EXTENDED_ITEM, true);
 
         if (ext) {
-            adapter = new ExtendedShoppingListAdapter(getActivity());
+            adapter = new ExtendedShoppingListAdapter(getActivity(), parent);
         } else {
             adapter = new StandardShoppingListAdapter(getActivity());
         }
@@ -61,6 +62,7 @@ public class BuylistListFragment extends ContentFragment implements Observer {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ShoppingList list = (ShoppingList) adapter.getItem(i);
                 if (list != null) {
+                    Log.d(getClass().getSimpleName(), "displaying list: " + list.getId());
                     parent.displayDetails(list);
                 } else {
                     Toast.makeText(getActivity(), "internal error", Toast.LENGTH_SHORT).show();

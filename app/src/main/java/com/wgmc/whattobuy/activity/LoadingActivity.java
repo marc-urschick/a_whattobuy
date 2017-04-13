@@ -37,8 +37,6 @@ import static com.wgmc.whattobuy.pojo.Shoptype.TOYS;
 import static com.wgmc.whattobuy.pojo.Shoptype.VEHICLES;
 
 public class LoadingActivity extends AppCompatActivity {
-    public static final String PREF_NAME = "whattobuy_preferences";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,25 +45,31 @@ public class LoadingActivity extends AppCompatActivity {
         // init persistence
         BuylistOpenHelper database = new BuylistOpenHelper(this);
         initShoptypeStrings(); // init Strings after Resource Loading
-        // Strings are loaded after classes, therefore corresponding translated strings for the enum has to be assigned durig runtime
+        // Strings are loaded after classes, therefore corresponding translated
+        //   strings for the enum has to be assigned durig runtime
 
         // init Services
+        /// main service on which all other services rely on
         MainService.generateInstance();
         try {
+            //// set persistence of main service
             MainService.getInstance().setDb(database);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        /// init settings service
         SettingsService.createInstance();
-        SettingsService.getInstance().loadSettings(this);
+
+        /// init pojo services
         ShopService.generateInstance();
         ShoplistService.generateInstance();
         ItemService.generateInstance();
 
+        /// init feature managment
         FeatureService.createInstance();
 
-        // init sensors und features
+        //// init sensors und features
         ShakeSensorFeature ssf = new ShakeSensorFeature(this);
         FeatureService.getInstance().addSensorFeature(ssf);
 
@@ -102,4 +106,5 @@ public class LoadingActivity extends AppCompatActivity {
         CAFE.setShownAs(getString(R.string.shoptype_cafe));
         OTHER.setShownAs(getString(R.string.shoptype_other));
     }
+
 }

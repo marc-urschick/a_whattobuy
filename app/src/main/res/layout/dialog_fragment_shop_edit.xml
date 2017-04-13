@@ -75,6 +75,13 @@
             android:text="Abort" />
 
         <Button
+            android:id="@+id/dialog_shop_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Remove"/>
+
+        <Button
             android:id="@+id/dialog_shop_commit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

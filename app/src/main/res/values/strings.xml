@@ -42,4 +42,6 @@
     <string name="shop_list_title">Shops</string>
     <string name="settings_shakeToCheckItems">Use Shake to Check Items</string>
     <string name="exit">Exit</string>
+    <string name="dialog_tooltip_title">Tips</string>
+    <string name="dialog_tooltip_show_tips_on_startup">Show tips on Startup</string>
 </resources>

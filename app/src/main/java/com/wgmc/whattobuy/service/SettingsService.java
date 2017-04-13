@@ -1,8 +1,11 @@
 package com.wgmc.whattobuy.service;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.wgmc.whattobuy.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +32,8 @@ public class SettingsService extends DefaultService {
     private static final String prefName = "com.wgmc.whattobuy.settings";
 
     // Settings Keys:
-    public static final String SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS = "enShChIt";
+    public static String SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS;
+    public static String SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL;
 
     private Map<String, Object> settings;
 
@@ -37,8 +41,8 @@ public class SettingsService extends DefaultService {
         settings = new HashMap<>();
     }
 
-    public void loadSettings(Context c) {
-        SharedPreferences sp = c.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+    public void loadSettings(Activity c) {
+        SharedPreferences sp = c.getPreferences(Context.MODE_PRIVATE);
 
         Map<String, ?> all = sp.getAll();
 
@@ -59,14 +63,29 @@ public class SettingsService extends DefaultService {
         settings.put(key, val);
     }
 
-    public void saveSettings(Context c) {
-        SharedPreferences pref = c.getSharedPreferences(prefName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
+    public void saveSettings(Activity c) {
+        SharedPreferences pref = c.getPreferences(Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = pref.edit();
 
         for (Map.Entry<String, Object> e : settings.entrySet()) {
+            Log.d("Settings", e.getKey() + ": " + e.getValue());
             editor.putString(e.getKey(), e.getValue().toString());
         }
 
-        editor.apply();
+//        editor.commit();
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                editor.commit();
+            }
+        }, "settings-saver");
+        t.setDaemon(true);
+        t.start();
+    }
+
+    public void initSettingKeys(Activity a) {
+        SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS = a.getString(R.string.SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS);
+        SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL = a.getString(R.string.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL);
     }
 }
