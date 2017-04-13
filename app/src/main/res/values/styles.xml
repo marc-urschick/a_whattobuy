@@ -4,7 +4,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- we choose the colr colorPrimaryDark from the color.xml -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- we choose the colr colorAccent from the color.xml -->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
