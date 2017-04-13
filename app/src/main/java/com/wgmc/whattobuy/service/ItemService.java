@@ -16,7 +16,7 @@ import java.util.Observer;
 /**
  * Created by proxie on 24.03.17.
  */
-
+// service that manages the handling and persistence of item pojo instances
 public class ItemService extends DefaultService {
     public static ItemService getInstance() {
         if (instance == null) {

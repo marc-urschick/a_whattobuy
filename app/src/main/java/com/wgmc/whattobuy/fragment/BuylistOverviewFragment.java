@@ -17,7 +17,7 @@ import java.util.Observable;
 /**
  * Created by notxie on 11.03.17.
  */
-
+// Fragment that handles master/detail view for shopping lists (splitscreen and back and forward action between list and overview)
 public class BuylistOverviewFragment extends ContentFragment {
     private boolean dual;
 

@@ -20,11 +20,13 @@ import java.util.Observable;
 /**
  * Created by proxie on 27.03.17.
  */
-
+// Overview Fragment Content for Shops
+    // by clicking on a shop entry on the list you can open the edit dialog
 public class ShopListFragment extends ContentFragment {
     private ListView list;
 
     public ShopListFragment() {
+        // adding services to be observed from this class and to receive updates if data hast changed
         addObservingService(ShopService.getInstance());
     }
 

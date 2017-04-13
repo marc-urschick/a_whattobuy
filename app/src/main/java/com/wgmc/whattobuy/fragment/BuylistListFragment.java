@@ -27,13 +27,14 @@ import java.util.Observer;
 /**
  * Created by notxie on 09.03.17.
  */
-
+// Overview Fragment Content for Shopping Lists
 public class BuylistListFragment extends ContentFragment implements Observer {
     public static final String ARG_EXTENDED_ITEM = "arg_ext_list";
     private BuylistOverviewFragment parent;
     private ListAdapter adapter;
 
     public BuylistListFragment() {
+        // adding services to be observed from this class and to receive updates if data hast changed
         addObservingService(ItemService.getInstance());
         addObservingService(ShoplistService.getInstance());
     }

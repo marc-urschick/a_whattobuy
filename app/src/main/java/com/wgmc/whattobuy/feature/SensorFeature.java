@@ -9,7 +9,8 @@ import android.util.Log;
 /**
  * Created by proxie on 4.4.17.
  */
-
+// standard functions of any sensor feature
+    // this class must be root of all sensor features and implemented features
 public class SensorFeature {
     private SensorManager manager;
     private Sensor sensor;

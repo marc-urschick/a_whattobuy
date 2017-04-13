@@ -8,8 +8,11 @@ import java.util.Observer;
 /**
  * Created by proxie on 27.03.17.
  */
-
-public class DefaultService extends Observable implements Observer {
+// default service implementation that all service classes should extend
+    // this class contains features for observing and and managing observers
+    // footnote default java implementation of observable does not work properly
+    // and does not save observers correctly
+public abstract class DefaultService extends Observable implements Observer {
     private List<Observer> observers;
 
     protected DefaultService() {

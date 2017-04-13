@@ -84,7 +84,6 @@ public class ExtendedShoppingItemListAdapter extends ArrayAdapter<Item> implemen
     private void editAction(Item i) {
         DialogFragment d = new ItemDialogFragment();
         ItemDialogFragment.item = i;
-        ItemDialogFragment.list = list;
         d.show(fragmentManager, "Edit Item");
     }
 }

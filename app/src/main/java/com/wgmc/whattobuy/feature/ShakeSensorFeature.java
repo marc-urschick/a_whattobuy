@@ -15,7 +15,7 @@ import java.util.Locale;
 /**
  * Created by proxie on 4.4.17.
  */
-
+// class is used for managing shake events when the device is shaked
 public class ShakeSensorFeature extends SensorFeature {
     public static final int SHAKE_HAPPENED = -7389;
 
@@ -140,7 +140,7 @@ public class ShakeSensorFeature extends SensorFeature {
 
             public void onMySensorChanged(SensorEvent event) {
                 Log.d(getClass().getSimpleName(), "Shake event occurred");
-                    FeatureService.getInstance().notifyObservers(SHAKE_HAPPENED);
+                FeatureService.getInstance().notifyObservers(SHAKE_HAPPENED);
             }
         });
     }

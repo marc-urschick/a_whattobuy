@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by proxie on 5.4.17.
  */
-
+// settings managment handling saving and loading of system settings and preferences
 public class SettingsService extends DefaultService {
     private static SettingsService instance;
 

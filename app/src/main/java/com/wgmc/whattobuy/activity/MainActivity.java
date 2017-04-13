@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
     };
     // </editor-fold>
 
+    public static boolean tooltipOpen = false;
+
     /**
      *
      * @param key the key of the preference
@@ -195,8 +197,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
         displayFragment(QueueHolder.viewingFragment);
 
         // show welcome screen (tooltips) if enabled
-        if (SettingsService.getInstance().getSetting(SettingsService.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL).equals("true")) {
+        if (SettingsService.getInstance().getSetting(SettingsService.SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL).equals("true") && !tooltipOpen) {
             new BeginTooltipDialogFragment().show(getFragmentManager(), "tooltips");
+            tooltipOpen = true;
         }
 
         // call super method

@@ -16,7 +16,7 @@ import java.util.Observer;
 /**
  * Created by notxie on 09.03.17.
  */
-
+// service that manages the handling and persistence of shopping list pojo instances
 public class ShoplistService extends DefaultService {
     public static ShoplistService getInstance() {
         if (instance == null)

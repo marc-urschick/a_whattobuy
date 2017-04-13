@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by proxie on 27.03.17.
  */
-
+// service that manages the handling and persistence of shop pojo instances
 public class ShopService extends DefaultService {
     private static ShopService instance;
 

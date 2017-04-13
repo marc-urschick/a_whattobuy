@@ -10,12 +10,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.wgmc.whattobuy.R;
+import com.wgmc.whattobuy.activity.MainActivity;
 import com.wgmc.whattobuy.service.SettingsService;
 
 /**
  * Created by proxie on 10.4.17.
  */
-
+// Dialog which shows Tooltips on startup that can be enabled and disabled from within here or within settings
 public class BeginTooltipDialogFragment extends DialogFragment {
     @Nullable
     @Override
@@ -26,6 +27,7 @@ public class BeginTooltipDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+                MainActivity.tooltipOpen = false;
             }
         });
 

@@ -14,13 +14,14 @@ import com.wgmc.whattobuy.R;
 import com.wgmc.whattobuy.pojo.Item;
 import com.wgmc.whattobuy.pojo.ShoppingList;
 import com.wgmc.whattobuy.service.ItemService;
+import com.wgmc.whattobuy.service.ShoplistService;
 
 /**
  * Created by notxie on 09.03.17.
  */
-
+// Dialog for editing and creating Items and handing them over to the service class
 public class ItemDialogFragment extends DialogFragment {
-    public static ShoppingList list;
+    // static instance holding of Item pojo that shall be edited or created
     public static Item item;
 
     public ItemDialogFragment() {
@@ -55,9 +56,11 @@ public class ItemDialogFragment extends DialogFragment {
                     ItemService.getInstance().addItem(item);
 
                     if (newItem) {
-                        list.addItem(item);
+                        ShoplistService
+                                .getInstance()
+                                .getShoppingListById((int) item.getListId())
+                                .addItem(item);
                     }
-                    list = null;
                     item = null;
                     dismiss();
                 }
@@ -67,7 +70,6 @@ public class ItemDialogFragment extends DialogFragment {
         v.findViewById(R.id.dialog_item_abort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list = null;
                 item = null;
                 dismiss();
             }
@@ -78,7 +80,6 @@ public class ItemDialogFragment extends DialogFragment {
             public void onClick(View v) {
                 try {
                     ItemService.getInstance().removeItem(item);
-                    list = null;
                     item = null;
                     dismiss();
                 } catch (Exception e) {
