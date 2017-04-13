@@ -33,5 +33,10 @@
     <string name="menu_shop">Shop</string>
     <string name="menu_settings">Einstellungen</string>
     <string name="shop_list_title">Shops</string>
+    <string name="settings_shakeToCheckItems">odškrtnout shake položky</string>
+    <string name="exit">výjezd</string>
+    <string name="action_settings">nastavení</string>
+    <string name="SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL">shsttotu</string>
+    <string name="SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS">enshtochit</string>
 
 </resources>

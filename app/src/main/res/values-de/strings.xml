@@ -36,4 +36,6 @@
     <string name="shop_list_title">Shops</string>
     <string name="settings_shakeToCheckItems">Schüttlen um Items abzuhaken</string>
     <string name="exit">Beenden</string>
+    <string name="SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL">shsttotu</string>
+    <string name="SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS">enshtochit</string>
 </resources>
