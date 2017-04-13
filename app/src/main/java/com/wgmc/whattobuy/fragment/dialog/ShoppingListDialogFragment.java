@@ -27,8 +27,9 @@ import java.util.Locale;
 /**
  * Created by proxie on 27.03.17.
  */
-
+// Dialog for editing and creating Shopping Lists
 public class ShoppingListDialogFragment extends DialogFragment {
+    // static intsance holding for list that is created or edited
     public static ShoppingList list;
 
     private Spinner shop;

@@ -13,7 +13,8 @@ import java.util.Observer;
 /**
  * Created by proxie on 4.4.17.
  */
-
+// service for administration of sensor features
+    // handles registration and unregistration of features
 public class FeatureService extends DefaultService {
     private static FeatureService instance;
 

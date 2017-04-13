@@ -20,11 +20,12 @@ import java.util.Observable;
 /**
  * Created by proxie on 21.03.17.
  */
-
+// starting screen content
 public class MainFragment extends ContentFragment {
     private TextView listsCntTextView, toDoCntTextView, doneCntTextView;
 
     public MainFragment() {
+        // adding services to be observed from this class and to receive updates if data hast changed
         addObservingService(ItemService.getInstance());
         addObservingService(ShoplistService.getInstance());
     }

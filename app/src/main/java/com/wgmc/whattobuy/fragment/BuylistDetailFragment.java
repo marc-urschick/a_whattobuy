@@ -32,7 +32,7 @@ import java.util.Observer;
 /**
  * Created by notxie on 09.03.17.
  */
-
+// Detailed representation of a Shopping List
 public class BuylistDetailFragment extends ContentFragment implements Observer {
     public static final String ARG_LIST_ID = "arg_list_id";
 
@@ -42,9 +42,10 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
     private ShoppingList list;
 
     public BuylistDetailFragment() {
+        // adding services to be observed from this class and to receive updates if data hast changed
         addObservingService(ShoplistService.getInstance());
         addObservingService(ItemService.getInstance());
-        addObservingService(FeatureService.getInstance());
+        addObservingService(FeatureService.getInstance()); // or receive notification that an event occurred
     }
 
     @Nullable

@@ -17,7 +17,8 @@ import com.wgmc.whattobuy.service.SettingsService;
 /**
  * Created by proxie on 4.4.17.
  */
-
+// content for settings and visual representation of preferences
+    // from this content you shall be able to change every setting in the application
 public class SettingsFragment extends ContentFragment {
     @Nullable
     @Override

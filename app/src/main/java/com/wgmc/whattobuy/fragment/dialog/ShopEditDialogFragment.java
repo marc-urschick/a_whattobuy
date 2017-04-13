@@ -18,15 +18,15 @@ import com.wgmc.whattobuy.service.ShopService;
 /**
  * Created by proxie on 27.03.17.
  */
-
+// Dialog for editing and creating Shops
 public class ShopEditDialogFragment extends DialogFragment {
+    // static instance holding of item that shall be created or edited
     public static Shop heldItem;
 
     private EditText name, address;
     private Spinner type;
 
     public ShopEditDialogFragment() {
-
         if (heldItem == null) {
             heldItem = new Shop(-1L);
         }

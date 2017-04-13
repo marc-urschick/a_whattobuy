@@ -15,7 +15,7 @@ import com.wgmc.whattobuy.service.SettingsService;
 /**
  * Created by proxie on 10.4.17.
  */
-
+// Dialog which shows Tooltips on startup that can be enabled and disabled from within here or within settings
 public class BeginTooltipDialogFragment extends DialogFragment {
     @Nullable
     @Override
