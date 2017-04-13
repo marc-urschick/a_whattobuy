@@ -9,6 +9,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.wgmc.whattobuy.service.SettingsService;
 import com.wgmc.whattobuy.service.ShopService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             if (toShow != null) {
                 QueueHolder.contentQueue.push(toShow);
+                displayQueue();
                 displayFragment(toShow);
             }
 
@@ -109,6 +112,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
     // </editor-fold>
 
     public static boolean tooltipOpen = false;
+
+    private void displayQueue() {
+        for (ContentFragment aContentQueue : QueueHolder.contentQueue) {
+            Log.d("queue item:", aContentQueue.getClass().getSimpleName());
+        }
+    }
 
     /**
      *
@@ -320,6 +329,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
         trans.replace(R.id.activity_main_content_frame, getActFragmentFromQueue());
 
         trans.commit();
+
+        displayQueue();
     }
 
     /**

@@ -30,8 +30,6 @@ public class ItemService extends DefaultService {
     private List<Item> items;
     private SparseArray<Item> assignedItems;
 
-    public static final DateFormat displayDateFormat = new SimpleDateFormat("dd. MM. yyyy", Locale.getDefault());
-
     private ItemService() {
         items = new ArrayList<>();
         assignedItems = new SparseArray<>();

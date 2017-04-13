@@ -79,9 +79,23 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
             }
         });
 
+        root.findViewById(R.id.frag_bld_clear_done).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        root.findViewById(R.id.frag_bld_remove).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         if (list != null) {
             title.setText(list.getName());
-            date.setText(ShoplistService.displayDateFormat.format(list.getDueTo()));
+            date.setText(list.getDueTo());
             shop.setText(list.getWhereToBuy().getName());
             items.setAdapter(createAdapter());
         }
@@ -100,7 +114,7 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
             }
 
             if (date != null) {
-                date.setText(ShoplistService.displayDateFormat.format(list.getDueTo()));
+                date.setText(list.getDueTo());
             }
 
             if (shop != null) {

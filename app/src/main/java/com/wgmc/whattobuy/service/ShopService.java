@@ -69,7 +69,9 @@ public class ShopService extends DefaultService {
             rawRemove(s);
             notifyObservers();
 
-            for (ShoppingList list : ShoplistService.getInstance().getShoppingLists()) {
+            List<ShoppingList> tmpLst = new ArrayList<>(ShoplistService.getInstance().getShoppingLists());
+
+            for (ShoppingList list : tmpLst) {
                 if (list.getWhereToBuy().getId() == sid) {
                     ShoplistService.getInstance().removeShoppingList(list);
                 }

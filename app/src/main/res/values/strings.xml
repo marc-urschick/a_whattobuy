@@ -44,4 +44,8 @@
     <string name="exit">Exit</string>
     <string name="dialog_tooltip_title">Tips</string>
     <string name="dialog_tooltip_show_tips_on_startup">Show tips on Startup</string>
+    <string name="fragment_edit_buylist">Edit Buylist</string>
+    <string name="fragment_create_item">Create Item</string>
+    <string name="fragment_delete_buylist">Delete List</string>
+    <string name="fragment_delete_checked_items">Delete Checked Items</string>
 </resources>

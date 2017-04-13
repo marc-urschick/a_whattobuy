@@ -45,14 +45,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Edit Buylist" />
+            android:text="@string/fragment_edit_buylist" />
         <!-- Create a Button -->
         <Button
             android:id="@+id/frag_bld_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Create Item" />
+            android:text="@string/fragment_create_item" />
     </LinearLayout>
     <!-- Create a Linear Layout -->
     <LinearLayout
@@ -66,14 +66,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete Buylist" />
+            android:text="@string/fragment_delete_buylist" />
         <!-- Create a Button -->
         <Button
             android:id="@+id/frag_bld_clear_done"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete Checked Items" />
+            android:text="@string/fragment_delete_checked_items" />
         <!-- Close the Linear Layout -->
     </LinearLayout>
     <!-- Close the Linear Layout -->

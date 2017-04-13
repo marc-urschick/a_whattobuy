@@ -72,8 +72,10 @@ public class ShopEditDialogFragment extends DialogFragment {
         v.findViewById(R.id.dialog_shop_remove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (heldItem.getId() > 0)
+                    ShopService.getInstance().removeShop(heldItem);
                 heldItem = null;
-                ShopService.getInstance().removeShop(heldItem);
+                dismiss();
             }
         });
 

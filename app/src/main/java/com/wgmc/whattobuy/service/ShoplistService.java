@@ -29,8 +29,6 @@ public class ShoplistService extends DefaultService {
     private List<ShoppingList> shoppingLists;
     private SparseArray<ShoppingList> assignedShoppingLists;
 
-    public static final DateFormat displayDateFormat = new SimpleDateFormat("dd. MM. yyyy", Locale.getDefault());
-
     private ShoplistService() {
         shoppingLists = new ArrayList<>();
         assignedShoppingLists = new SparseArray<>();
