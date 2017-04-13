@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- this is the tooltip on the start screen to know whot you must do at beginning in English-->
     <string name="tooltip">Thank you for downloading What to Buy!\n\nSlide in from left screen edge to open menu.</string>
 </resources>

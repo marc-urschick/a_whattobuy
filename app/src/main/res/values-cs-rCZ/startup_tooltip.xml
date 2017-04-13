@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tooltip"></string>
+    <!-- this is the tooltip on the start screen to know whot you must do at beginning in Tschechisch-->
+    <string name="tooltip">Děkujeme, že jste se rozhodli, co koupit! \ N \ nWischen od levého okraje obrazovky doprava otevřete nabídku.</string>
 </resources>

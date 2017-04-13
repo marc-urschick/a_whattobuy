@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tooltip"></string>
+
+    <!-- this is the tooltip on the start screen to know whot you must do at beginning in Spain-->
+    <string name="tooltip">Gracias por elegir Qué comprar! \ N \ nWischen desde el borde izquierdo de la pantalla hacia la derecha para abrir el menú.</string>
+
 </resources>
