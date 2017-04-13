@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by notxie on 27.01.17.
+ * Created by notxie, poidl on 27.01.17. and 10.04.2017.
  */
 
 public enum Shoptype {
@@ -35,25 +35,32 @@ public enum Shoptype {
     CAFE(20),
     OTHER(21);
 
+    // Set the diffent enums
     private String shownAs;
+    //Declare the variable shownAs with the data typ String
     private long id;
+    //Declare the variable id with the data typ long
 
     Shoptype(long id) {
         this.id = id;
     }
 
+    //Setter for ShownAs
     public void setShownAs(String s) {
         this.shownAs = s + "";
     }
 
+    //Getter for ShownAs
     public String getShownAs() {
         return shownAs;
     }
 
+    //Getter for id
     public long getId() {
         return id;
     }
 
+    //Method to create a List as shoptypes with the value vals and behind the addAll return the List of shoptypes
     public static List<Shoptype> valuesAsList() {
         List<Shoptype> vals = new ArrayList<>();
 
