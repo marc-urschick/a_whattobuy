@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- This is the xml for the side menue bar-->
     <item
         android:id="@+id/menu_home"
         android:title="@string/menu_home" />
+    <!-- the side menue bar home-->
     <item
         android:enabled="false"
         android:title="" />
+    <!-- the side menue bar boolean- -->
     <item
         android:id="@+id/menu_list_buylist"
         android:title="@string/menu_buylists" />
+    <!-- the side menue bar buylist-->
     <item
         android:id="@+id/menu_list_shop"
         android:title="@string/menu_shops" />
+    <!-- the side menue bar menu list shop-->
     <item
         android:enabled="false"
         android:title="" />
+    <!-- the side menue bar boolean- -->
     <item
         android:id="@+id/menu_settings"
         android:title="@string/menu_settings" />
+    <!-- the side menue bar settings-->
     <item
         android:id="@+id/menu_exit"
         android:title="@string/exit" />
+    <!-- the side menue bar exit-->
 </menu>
