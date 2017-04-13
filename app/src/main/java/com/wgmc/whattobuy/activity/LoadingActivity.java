@@ -82,7 +82,7 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
+    // That method init the shoptypestrings and set it
     private void initShoptypeStrings() {
         GROCERY.setShownAs(getString(R.string.shoptype_grocery));
         TECHNIC.setShownAs(getString(R.string.shoptype_technic));
