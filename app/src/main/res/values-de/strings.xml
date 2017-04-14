@@ -38,4 +38,10 @@
     <string name="exit">Beenden</string>
     <string name="SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL">shsttotu</string>
     <string name="SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS">enshtochit</string>
+    <string name="fragment_create_item">Artikel erstellen</string>
+    <string name="fragment_delete_buylist">Liste löschen</string>
+    <string name="fragment_delete_checked_items">Geprüfte Gegenstände löschen</string>
+    <string name="fragment_edit_buylist">Einkaufsliste bearbeiten</string>
+    <string name="dialog_tooltip_title">Tipps</string>
+    <string name="dialog_tooltip_show_tips_on_startup">Tipps zum Start anzeigen</string>
 </resources>

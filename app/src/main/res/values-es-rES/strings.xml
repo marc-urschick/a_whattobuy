@@ -38,6 +38,13 @@
     <string name="action_settings">ajustes</string>
     <string name="SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL">shsttotu</string>
     <string name="SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS">enshtochit</string>
+    <string name="fragment_create_item">Crear elemento</string>
+    <string name="fragment_delete_buylist">Eliminar lista</string>
+    <string name="fragment_delete_checked_items">Eliminar elementos marcados</string>
+    <string name="fragment_edit_buylist">Editar Buylist</string>
+    <string name="navigation_drawer_open" translatable="false"></string>
+    <string name="dialog_tooltip_title">Consejos</string>
+    <string name="dialog_tooltip_show_tips_on_startup">Mostrar sugerencias sobre el inicio</string>
 
 
 </resources>

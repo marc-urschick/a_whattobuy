@@ -38,5 +38,11 @@
     <string name="action_settings">nastavení</string>
     <string name="SETTING_SHOW_STARTUP_TOOLTIP_TUTORIAL">shsttotu</string>
     <string name="SETTING_ENABLE_SHAKE_TO_CHECK_ITEMS">enshtochit</string>
+    <string name="fragment_create_item">Vytvorit polozku</string>
+    <string name="fragment_delete_buylist">smazat seznam</string>
+    <string name="fragment_delete_checked_items">Smazat zaškrtnuté položky</string>
+    <string name="fragment_edit_buylist">editovat Buylist</string>
+    <string name="dialog_tooltip_title">Tipy</string>
+    <string name="dialog_tooltip_show_tips_on_startup">Zobrazit tipy při spuštění</string>
 
 </resources>
