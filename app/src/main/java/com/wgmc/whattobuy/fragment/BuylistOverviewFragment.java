@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,17 @@ public class BuylistOverviewFragment extends ContentFragment {
         arg.putLong(BuylistDetailFragment.ARG_LIST_ID, list.getId());
         FragmentHolder.DETAIL_FRAGMENT = new BuylistDetailFragment();
         FragmentHolder.DETAIL_FRAGMENT.setArguments(arg);
+        FragmentHolder.DETAIL_FRAGMENT.parent = this;
         fm.beginTransaction().replace(dual ? R.id.frag_bl_ov_detail : R.id.frag_bl_ov_list, FragmentHolder.DETAIL_FRAGMENT).commit();
+    }
+
+    public void hideDetails() {
+        if (!dual) {
+            fm.beginTransaction().replace(R.id.frag_bl_ov_list, FragmentHolder.LIST_FRAGMENT).commit();
+        } else {
+            fm.beginTransaction().remove(FragmentHolder.DETAIL_FRAGMENT).commit();
+        }
+        FragmentHolder.DETAIL_FRAGMENT = null;
     }
 
     @Override

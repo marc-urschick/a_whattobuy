@@ -77,14 +77,14 @@ public class ShoplistService extends DefaultService {
         if (list == null)
             return;
 
+        for (Item i : list.getItems()) {
+            ItemService.getInstance().removeItem(i);
+        }
+
         if (list.getId() > 0) {
             MainService.getInstance().getDb().deleteShoppingList(list);
             rawRemove(list);
             notifyObservers();
-        }
-
-        for (Item i : list.getItems()) {
-            ItemService.getInstance().removeItem(i);
         }
     }
 }

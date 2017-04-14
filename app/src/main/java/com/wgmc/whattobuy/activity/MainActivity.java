@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     break;
                 case R.id.menu_exit:
                     finish();
-                    break;
+                    return true;
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 QueueHolder.contentQueue.push(toShow);
                 displayQueue();
                 displayFragment(toShow);
+            } else {
+                displayFragment(QueueHolder.viewingFragment);
             }
 
             return true;
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         for (ContentFragment aContentQueue : QueueHolder.contentQueue) {
             Log.d("queue item:", aContentQueue.getClass().getSimpleName());
         }
+        Log.d("queue item:", "end of queue\n");
     }
 
     /**
@@ -202,7 +205,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
         });
 
         // push opening fragment to queueing list and display it
-        QueueHolder.contentQueue.push(QueueHolder.viewingFragment);
+        if (QueueHolder.contentQueue.isEmpty() || !QueueHolder.contentQueue.peek().getClass().equals(QueueHolder.viewingFragment.getClass()))
+            QueueHolder.contentQueue.push(QueueHolder.viewingFragment);
         displayFragment(QueueHolder.viewingFragment);
 
         // show welcome screen (tooltips) if enabled

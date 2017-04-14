@@ -70,6 +70,7 @@ public class ItemService extends DefaultService {
     public void removeItem(Item i) {
         if (i.getId() > 0) {
             MainService.getInstance().getDb().deleteItem(i);
+            ShoplistService.getInstance().getShoppingListById((int) i.getListId()).removeItem(i);
             rawRemove(i);
             notifyObservers();
         }

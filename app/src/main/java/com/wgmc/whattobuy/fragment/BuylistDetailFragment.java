@@ -26,6 +26,8 @@ import com.wgmc.whattobuy.service.ItemService;
 import com.wgmc.whattobuy.service.SettingsService;
 import com.wgmc.whattobuy.service.ShoplistService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -40,6 +42,8 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
     private ListView items;
 
     private ShoppingList list;
+
+    public BuylistOverviewFragment parent;
 
     public BuylistDetailFragment() {
         // adding services to be observed from this class and to receive updates if data hast changed
@@ -82,14 +86,21 @@ public class BuylistDetailFragment extends ContentFragment implements Observer {
         root.findViewById(R.id.frag_bld_clear_done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                List<Item> is = new ArrayList<>(list.getItems());
+                for (Item i : is) {
+                    if (i.isChecked()) {
+                        ItemService.getInstance().removeItem(i);
+                    }
+                }
             }
         });
 
         root.findViewById(R.id.frag_bld_remove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ShoplistService.getInstance().removeShoppingList(list);
+                list = null;
+                parent.hideDetails();
             }
         });
 
